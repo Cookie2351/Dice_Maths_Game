@@ -1,0 +1,70 @@
+body
+{
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the game dice grid */
+#diceGrid
+{
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+    gap: 2px;
+}
+
+.tile
+{
+    width: 60px;
+    height: 60px;
+    border: 4px solid #000000;
+}
+
+.tile.visible
+{
+    background-color: #f7f7f7;
+}
+
+.tile.hidden
+{
+    visibility: hidden;
+}
+
+.tile.start
+{
+    background-color: #0dc529dd;
+}
+
+.tile.end
+{
+    background-color: #c31616dd;
+}
+
+/* Style for the HTML */
+header 
+{
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+main
+{
+    background-color: #6b6969;
+    text-align: left;
+    padding: 50px;
+    min-height: 500px;
+}
+
+footer
+{
+    background-color: #222;
+    color: white;
+    text-align: right;
+    padding: 20px;
+
+    
+}
+
+

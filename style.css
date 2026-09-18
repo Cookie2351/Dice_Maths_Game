@@ -4,20 +4,33 @@ body
     font-family: Arial, sans-serif;
 }
 
-/* Style for the game dice grid */
+/* ------------------------------------------------ */
+/*           Style for the game dice grid           */
 #diceGrid
 {
     display: grid;
-    grid-template-columns: repeat(8, 60px);
-    grid-template-rows: repeat(8, 60px);
-    gap: 2px;
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(8, 80px);
+
+    width: 640px;
+    height: 640px;
+    margin: 0 auto;
+
+    position: relative;
 }
 
 .tile
 {
-    width: 60px;
-    height: 60px;
-    border: 4px solid #000000;
+    width: 80px;
+    height: 80px;
+    box-sizing: border-box;
+    position: relative;
+    outline: 3px solid #000000;
+    
+    border-right: 3px solid #000000;
+    border-left: 3px solid #000000;
+    border-top: 3px solid #000000;
+    border-bottom: 3px solid #000000;
 }
 
 .tile.visible
@@ -39,21 +52,38 @@ body
 {
     background-color: #c31616dd;
 }
+/* ------------------------------------------------ */
+/* ------------------------------------------------ */
+/*              Dice for the game                   */
+#dice
+{
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    border: 5px solid #000000;
+    border-radius: 10px;
 
+    position: absolute;
+    z-index: 10;
+    box-sizing: border-box;
+    transition: left 0.2s, top 0.2s;
+}
+/* ------------------------------------------------ */
+/* ------------------------------------------------ */
 /* Style for the HTML */
 header 
 {
     background-color: #222;
     color: white;
     text-align: center;
-    padding: 30px;
+    padding: 10px;
 }
 
 main
 {
     background-color: #6b6969;
     text-align: left;
-    padding: 50px;
+    padding: 10px;
     min-height: 500px;
 }
 
@@ -62,9 +92,7 @@ footer
     background-color: #222;
     color: white;
     text-align: right;
-    padding: 20px;
+    padding: 10px;
 
     
 }
-
-

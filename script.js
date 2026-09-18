@@ -1,5 +1,5 @@
 // visible grid
-const grid =
+const grid = // grid 8x8 - row 0-7, column 0-7
 [
     [0, 0, 0, 0, 0, 1, 0, 0],
     [0, 0, 0, 1, 1, 1, 0, 0],
@@ -11,7 +11,7 @@ const grid =
     [0, 0, 0, 1, 0, 0, 0, 0]
 ];
 
-// set start and end positions
+// set start and end positions | grid 8x8 row0-7, column0-7
 const start =
 {
     row: 7,
@@ -23,12 +23,28 @@ const end =
     column: 5
 };
 
+// set the dice top face and orientation for the puzzle 
+const dice =
+{
+    top: 5,
+    south: 3,
+    west: 1
+};
+
+// Store starting dice orientation
+const diceStart =
+{
+    top: dice.top, south: dice.south, west: dice.west
+};
+
+let targetScore = 29;
+
 // create grid
 const diceGrid = document.getElementById("diceGrid");
 
-for (let row = 0; row < 8; row++) {
+for (let row = 0; row < 8; row++) { // for grid 8x8
 
-    for (let column = 0; column < 8; column++)
+    for (let column = 0; column < 8; column++) // for grid 8x8
     {
         const tile = document.createElement("div");
 
@@ -59,14 +75,6 @@ for (let row = 0; row < 8; row++) {
     }
 }
 
-// set the dice top face and orientation for the puzzle 
-const dice =
-{
-    top: 5,
-    south: 3,
-    west: 1
-};
-
 // Set the other dice faces from orientation
 function getSides(number)
 {
@@ -88,8 +96,142 @@ dice.east = getSides(dice.west);
 
 console.log(dice);
 
-// set score for start
+// set start square as dice start position
+const diceLocation = {...start};
+
+const diceElement = document.getElementById("dice");
+
+function updateDicePosition()
+{
+    diceElement.style.left = `${diceLocation.column * 80 + 10}px`;
+    diceElement.style.top = `${diceLocation.row * 80 + 10}px`;
+}
+
+updateDicePosition();
+
+// Start game
 let score = 0;
+let rollCount = 0;
+let gameEnd = false;
+
+function canMoveTo(row, column)
+{
+    // Check if move position will be outside game grid
+    if (row < 0 || row >= 8 || column < 0 || column >= 8) // for grid 8x8
+    {
+        return false;
+    }
+
+    // Check if the position is hidden
+    if (grid[row][column] === 0)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+// handle dice location updates
+function move(direction)
+{
+    // stop game if ended
+    if (gameEnd)
+    {
+        return;
+    }
+
+    // start dice at correct start location
+    let newRow = diceLocation.row;
+    let newColumn = diceLocation.column;
+
+    // set dice movement new location on grid
+    switch (direction)
+    {
+        case "forward":
+            newRow --;
+            break;
+        case "backward":
+            newRow ++;
+            break;
+        case "right":
+            newColumn ++;
+            break;
+        case "left":
+            newColumn --;
+            break;
+    }
+
+    // check if move location is valid
+    if (!canMoveTo(newRow, newColumn))
+    {
+        return;
+    }
+
+    // update the dice position
+    diceLocation.row = newRow;
+    diceLocation.column = newColumn;
+
+    // update dice visual
+    updateDicePosition();
+
+    // count moves
+    rollCount++;
+
+    console.log("Number of moves", rollCount);
+    console.log("Dice position:", diceLocation.row, diceLocation.column);
+
+    // Roll the dice
+    switch (direction)
+    {
+        case "forward":
+            rollForward();
+            break;
+        case "backward":
+            rollBackward();
+            break;
+        case "right":
+            rollRight();
+            break;
+        case "left":
+            rollLeft();
+            break;
+    }
+
+    // Check if dice reached the goal
+    checkGoal();
+}
+
+// check if goal reached
+function checkGoal()
+{
+    if
+    (
+        diceLocation.row == end.row &&
+        diceLocation.column === end.column
+    )
+    {
+        if (score === targetScore)
+        {
+            gameEnd = true;
+
+            console.log("Success! Score reached:", score);
+            console.log("Rolls:", rollCount);
+        }
+        else
+        {
+            console.log("Incorrect score:", score);
+            console.log("Target score:", targetScore);
+            console.log("Resetting puzzle...");
+
+            setTimeout(() =>
+            {
+                resetDice();
+            }, 1000);
+        }
+
+
+    }
+}
 
 // creating NESW roll functions for changing top number
     // and adding the new number to the score
@@ -154,8 +296,64 @@ function rollLeft() // Roll west / left
     console.log("score:", score);
 }
 
-rollForward();
-rollForward();
-rollRight();
-rollBackward();
-console.log("Final score:", score);
+function resetDice() // Reset puzzle for re-attempt
+{
+    score = 0;
+    rollCount = 0;
+    gameEnd = false;
+    // reset dice start location
+    diceLocation.row = start.row;
+    diceLocation.column = start.column;
+    // reset dice start orientation
+    dice.top = diceStart.top;
+    dice.south = diceStart.south;
+    dice.west = diceStart.west;
+    dice.bottom = getSides(dice.top);
+    dice.north = getSides(dice.south);
+    dice.east = getSides(dice.west);
+
+    // reset dice visual
+    updateDicePosition();
+
+    console.log("Dice reset to:", diceLocation.row, diceLocation.column);
+    console.log("Dice orientation:", dice);
+}
+
+document.addEventListener("keydown", function(event)
+{
+    // stop arrow keys from scrolling the page
+    if
+    (
+        event.key === "ArrowUp" || event.key === "ArrowDown" ||
+        event.key === "ArrowLeft" || event.key === "ArrowRight"
+    )
+    {
+        event.preventDefault();
+    }
+
+    // set controls for the dice rolling
+    switch (event.key)
+    {
+        case "ArrowUp": case "w": case "W":
+            move("forward");
+            break;
+
+        case "ArrowDown": case "s": case"S":
+            move("backward");
+            break;
+
+        case "ArrowRight": case "d": case "D":
+            move("right");
+            break;
+
+        case "ArrowLeft": case "a": case "A":
+            move("left");
+            break;
+
+        case "r": case "R":
+            resetDice();
+            break;
+    }
+});
+
+// console.log("Final score:", score);

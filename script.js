@@ -1,12 +1,12 @@
 // visible grid
 const grid = // grid 8x8 - row 0-7, column 0-7
 [
-    [0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 0],
     [0, 0, 0, 1, 1, 1, 0, 0],
     [0, 0, 0, 1, 1, 1, 0, 0],
     [0, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 1, 0, 1, 0, 0],
     [0, 0, 0, 1, 1, 1, 0, 0],
     [0, 0, 0, 1, 0, 0, 0, 0]
 ];
@@ -37,7 +37,7 @@ const diceStart =
     top: dice.top, south: dice.south, west: dice.west
 };
 
-let targetScore = 29;
+let targetScore = 30;
 
 // create grid
 const diceGrid = document.getElementById("diceGrid");
@@ -109,10 +109,18 @@ function updateDicePosition()
 
 updateDicePosition();
 
+function updateDiceImage()
+{
+    const diceImage = document.getElementById("diceImage");
+
+    diceImage.src = `Assets/Dice_side${dice.top}.png`;
+}
+
 // Start game
 let score = 0;
 let rollCount = 0;
 let gameEnd = false;
+updateDiceImage();
 
 function canMoveTo(row, column)
 {
@@ -178,7 +186,7 @@ function move(direction)
     rollCount++;
 
     console.log("Number of moves", rollCount);
-    console.log("Dice position:", diceLocation.row, diceLocation.column);
+    console.log("Dice grid position:", diceLocation.row, diceLocation.column);
 
     // Roll the dice
     switch (direction)
@@ -196,6 +204,9 @@ function move(direction)
             rollLeft();
             break;
     }
+
+    // update the dice image after roll
+    updateDiceImage();
 
     // Check if dice reached the goal
     checkGoal();

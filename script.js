@@ -1,34 +1,50 @@
+// retrieve date
+function getTodayDate()
+{
+    const today = new Date();
+
+    const day = String(today.getDate()).padStart(2, "0");
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const year = today.getFullYear();
+
+    return `${day}/${month}/${year}`;
+}
+
+const todayDate = getTodayDate();
+
+document.getElementById("puzzleDate").textContent = `Date ${todayDate}`;
+
 // visible grid
 const grid = // grid 8x8 - row 0-7, column 0-7
 [
-    [0, 0, 0, 0, 1, 1, 0, 0],
-    [0, 0, 0, 0, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 0, 1, 0, 0],
-    [0, 0, 0, 1, 1, 1, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0]
+    [0, 0, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 1, 1, 1, 0, 0],
+    [0, 0, 1, 0, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 0, 0, 0, 0]
 ];
 
 // set start and end positions | grid 8x8 row0-7, column0-7
 const start =
 {
     row: 7,
-    column: 3
+    column: 2
 };
 const end =
 {
     row: 0,
-    column: 5
+    column: 3
 };
 
 // set the dice top face and orientation for the puzzle 
 const dice =
 {
-    top: 5,
-    south: 3,
-    west: 1
+    top: 1,
+    south: 2,
+    west: 4
 };
 
 // Store starting dice orientation
@@ -37,7 +53,7 @@ const diceStart =
     top: dice.top, south: dice.south, west: dice.west
 };
 
-let targetScore = 30;
+let targetScore = 45;
 
 // create grid
 const diceGrid = document.getElementById("diceGrid");

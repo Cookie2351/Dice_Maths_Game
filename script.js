@@ -119,8 +119,8 @@ const diceElement = document.getElementById("dice");
 
 function updateDicePosition()
 {
-    diceElement.style.left = `${diceLocation.column * 80 + 10}px`;
-    diceElement.style.top = `${diceLocation.row * 80 + 10}px`;
+    diceElement.style.left = `${diceLocation.column * 60 + 10}px`;
+    diceElement.style.top = `${diceLocation.row * 60 + 10}px`;
 }
 
 updateDicePosition();

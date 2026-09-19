@@ -1,7 +1,15 @@
+:root
+{
+    --gridsize: 60px;
+}
+:root{
+    --dicesize: 40px;
+}
+
 body
 {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', 'Times New Roman', 'Arial', Courier, sans-serif;
 }
 
 /* ------------------------------------------------ */
@@ -9,11 +17,11 @@ body
 #diceGrid
 {
     display: grid;
-    grid-template-columns: repeat(8, 80px);
-    grid-template-rows: repeat(8, 80px);
+    grid-template-columns: repeat(8, var(--gridsize));
+    grid-template-rows: repeat(8, var(--gridsize));
 
-    width: 640px;
-    height: 640px;
+    width: 480px;
+    height: 480px;
     margin: 0 auto;
 
     position: relative;
@@ -21,8 +29,8 @@ body
 
 .tile
 {
-    width: 80px;
-    height: 80px;
+    width: var(--gridsize);
+    height: var(--gridsize);
     box-sizing: border-box;
     position: relative;
     outline: 3px solid #000000;
@@ -57,8 +65,8 @@ body
 /*              Dice for the game                   */
 #dice
 {
-    width: 60px;
-    height: 60px;
+    width: var(--dicesize);
+    height: var(--dicesize);
     position: absolute;
     z-index: 10;
 
@@ -85,7 +93,7 @@ main
 {
     background-color: #6b6969;
     text-align: left;
-    padding: 10px;
+    padding: 20px;
     min-height: 500px;
 }
 

@@ -91,6 +91,27 @@ function forcePuzzle2()
 {
     forcePuzzle("SetPuzzle2");
 }
+function forcePuzzle3()
+{
+    forcePuzzle("SetPuzzle3");
+}
+function forcePuzzle4()
+{
+    forcePuzzle("SetPuzzle4");
+}
+function forcePuzzle5()
+{
+    forcePuzzle("SetPuzzle5");
+}
+function forcePuzzle6()
+{
+    forcePuzzle("SetPuzzle6");
+}
+
+function forcePuzzle0()
+{
+    forcePuzzle("BlankPuzzle0")
+}
 // --------------------------------------------------------------------------------//
 //                                  END OF DEV TOOLS                               //
 // --------------------------------------------------------------------------------//
@@ -136,7 +157,6 @@ function createGrid()
     }
 }
 // --------------------------------------------------------------------------------//
-
 
 // --------------------------------------------------------------------------------//
 selectPuzzle();
@@ -184,12 +204,18 @@ function updateDiceImage()
 
     diceImage.src = `Assets/Dice_side${dice.top}.png`;
 }
-// --------------------------------------------------------------------------------//
+// -------------------------------------------------------------------------------- //
 
 // Start game
 let score = 0;
 let rollCount = 0;
 let gameEnd = false;
+
+let canMove = true;
+const moveDelay = 150; // milliseconds      - set same as CSS dice roll speed
+const failDelay = 1500; // milliseconds      - for the CSS fail colour flash
+const winDelay = 3000;  // milliseconds     - for winning colour flash
+
 updateDiceImage();
 
 function canMoveTo(row, column)
@@ -215,6 +241,12 @@ function move(direction)
 {
     // stop game if ended
     if (gameEnd)
+    {
+        return;
+    }
+
+    // stop movement if within move delay
+    if (!canMove)
     {
         return;
     }
@@ -246,6 +278,9 @@ function move(direction)
         return;
     }
 
+    // start movement cooldown
+    canMove = false;
+
     // update the dice position
     diceLocation.row = newRow;
     diceLocation.column = newColumn;
@@ -256,9 +291,6 @@ function move(direction)
     // count moves
     rollCount++;
     document.getElementById("rollcount").textContent = rollCount;
-
-    console.log("Number of moves", rollCount);
-    console.log("Dice grid position:", diceLocation.row, diceLocation.column);
 
     // Roll the dice
     switch (direction)
@@ -282,6 +314,12 @@ function move(direction)
 
     // Check if dice reached the goal
     checkGoal();
+
+    // Allow for next move
+    setTimeout(() =>
+    {
+        canMove = true;
+    }, moveDelay);
 }
 // --------------------------------------------------------------------------------//
 
@@ -300,17 +338,23 @@ function checkGoal()
 
             console.log("Success! Score reached:", score);
             console.log("Rolls:", rollCount);
+
+            flashWin();
+
+            setTimeout(() => winDelay);
         }
         else
         {
             console.log("Incorrect score:", score);
             console.log("Target score:", targetScore);
             console.log("Resetting puzzle...");
+            
+            flashFail();
 
             setTimeout(() =>
             {
                 resetDice();
-            }, 1000);
+            }, failDelay);
         }
 
 
@@ -331,10 +375,7 @@ function rollForward() // Roll north / up
 
     score += dice.top
 
-    console.log("Rolled forwards");
-    console.log("top from forwards roll:", dice.top);
     document.getElementById("currentscore").textContent = score;
-    console.log("score:", score);
 }
 function rollBackward() // Roll south / down
 {
@@ -347,10 +388,7 @@ function rollBackward() // Roll south / down
 
     score += dice.top
 
-    console.log("Rolled backwards");
-    console.log("top from backwards roll:", dice.top);
     document.getElementById("currentscore").textContent = score;
-    console.log("score:", score);
 }
 function rollRight() // Roll east / right
 {
@@ -363,10 +401,7 @@ function rollRight() // Roll east / right
 
     score += dice.top
 
-    console.log("Rolled right");
-    console.log("top from right roll:", dice.top);
     document.getElementById("currentscore").textContent = score;
-    console.log("score:", score);
 }
 function rollLeft() // Roll west / left
 {
@@ -379,10 +414,7 @@ function rollLeft() // Roll west / left
 
     score += dice.top
 
-    console.log("Rolled left");
-    console.log("top from left roll:", dice.top);
     document.getElementById("currentscore").textContent = score;
-    console.log("score:", score);
 }
 // --------------------------------------------------------------------------------//
 
@@ -413,6 +445,45 @@ function resetDice() // Reset puzzle for re-attempt
     console.log("Dice reset to:", diceLocation.row, diceLocation.column);
     console.log("Dice orientation:", dice);
 }
+// --------------------------------------------------------------------------------//
+
+// Change the grid colour on puzzle failure
+function flashFail()
+{
+    const visibleTiles = diceGrid.querySelectorAll(".tile.visible");
+
+    visibleTiles.forEach(tile =>
+    {
+        tile.classList.add("fail");
+    });
+
+    setTimeout(() =>
+    {
+        visibleTiles.forEach(tile =>
+        {
+            tile.classList.remove("fail");
+        });
+    }, failDelay);
+}
+
+function flashWin()
+{
+    const visibleTiles = diceGrid.querySelectorAll(".tile.visible");
+
+    visibleTiles.forEach(tile =>
+    {
+        tile.classList.add("win");
+    });
+
+    setTimeout(() =>
+    {
+        visibleTiles.forEach(tile =>
+        {
+            tile.classList.remove("win");
+        });
+    }, winDelay);
+}
+
 // --------------------------------------------------------------------------------//
 
 // Key controls for the game
@@ -469,6 +540,22 @@ document.addEventListener("keydown", function(event)
             break;
         case "5":
             forcePuzzle5();
+            break;
+        case "6":
+            forcePuzzle6();
+            break;
+        case "7":
+            forcePuzzle7();
+            break;
+        case "8":
+            forcePuzzle8();
+            break;
+        case "9":
+            forcePuzzle9();
+            break;
+
+        case "0":
+            forcePuzzle0();
             break;
         // ------------------------------------------------------- //
         //                     END OF DEV TOOLS                    //

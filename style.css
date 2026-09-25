@@ -48,7 +48,7 @@ footer
 }
 #gameInfo
 {
-    width: 260px;
+    width: clamp(180px, 20vw, 260px);
     flex-shrink: 0;
 
     display: flex;
@@ -59,20 +59,34 @@ footer
 #diceGrid
 {
     display: grid;
-    grid-template-columns: repeat(6, var(--gridsize));
-    grid-template-rows: repeat(8, var(--gridsize));
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(8, 1fr);
 
-    width: 360px;
-    height: 480px;
+    width: min(90vw, 360px, 37.5vh);
+    aspect-ratio: 6 / 8;
 
     position: relative;
+}
+@media (max-width: 600px)
+{
+    #gameArea
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #gameInfo
+    {
+        width: 100%;
+        max-width: 360px;
+    }
 }
 /* ------------------------------------------------ */
 /* -                    Game Grid                 - */
 .tile
 {
-    width: var(--gridsize);
-    height: var(--gridsize);
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
     position: relative;
     outline: 3px solid #000000;
@@ -92,7 +106,7 @@ footer
 }
 .tile.win
 {
-    background-color: #8dff93;
+    background-color: #acffb0;
 }
 .tile.hidden
 {
@@ -110,12 +124,13 @@ footer
 /*              Dice for the game                   */
 #dice
 {
-    width: var(--dicesize);
-    height: var(--dicesize);
+    width: calc((100% / 6) * 0.67);
+    aspect-ratio: 1;
+    
     position: absolute;
     z-index: 10;
 
-    transition: left 0.15s, top 0.15s;
+    transition: left 0.2s, top 0.2s;
 }
 #diceImage
 {

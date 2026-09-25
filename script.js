@@ -192,8 +192,16 @@ const diceElement = document.getElementById("dice");
 
 function updateDicePosition()
 {
-    diceElement.style.left = `${diceLocation.column * 60 + 10}px`;
-    diceElement.style.top = `${diceLocation.row * 60 + 10}px`;
+    const tileSize = diceGrid.clientWidth / 6;
+    const diceSize = diceElement.offsetWidth;
+
+    const offset = (tileSize - diceSize) / 2;
+
+    diceElement.style.left =
+        `${diceLocation.column * tileSize + offset}px`;
+
+    diceElement.style.top =
+        `${diceLocation.row * tileSize + offset}px`;
 }
 
 updateDicePosition();
@@ -204,6 +212,12 @@ function updateDiceImage()
 
     diceImage.src = `Assets/Dice_side${dice.top}.png`;
 }
+
+window.addEventListener("resize", function()
+{
+    updateDicePosition();
+});
+
 // -------------------------------------------------------------------------------- //
 
 // Start game

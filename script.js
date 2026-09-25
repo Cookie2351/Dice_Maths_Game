@@ -1,3 +1,6 @@
+// --------------------------------------------------------------------------------//
+// --------------------------------------------------------------------------------//
+
 // retrieve date
 function getTodayDate()
 {
@@ -14,86 +17,132 @@ const todayDate = getTodayDate();
 
 document.getElementById("puzzleDate").textContent = `Date ${todayDate}`;
 
-// visible grid
-const grid = // grid 6x8 - column 0-5, row 0-7
-[
-    [0, 0, 1, 0, 0, 0],
-    [0, 1, 1, 1, 1, 1],
-    [0, 1, 0, 1, 0, 0],
-    [0, 1, 1, 1, 0, 0],
-    [0, 0, 1, 1, 0, 0],
-    [0, 0, 1, 1, 0, 0],
-    [0, 1, 1, 1, 0, 0],
-    [0, 1, 1, 0, 0, 0]
-];
+// ------------------------------------------------------------------------------- //
+//                         CURRENT PUZZLE DATA                                     //
+// set puzzle values
+let currentPuzzle;
+let grid;
+let start;
+let end;
+let dice;
 
-// set start and end positions | grid 6x8 column 0-5, row 0-7
-const start =
-{
-    row: 7,
-    column: 1
-};
-const end =
-{
-    row: 0,
-    column: 2
-};
+let diceStart;
 
-// set the dice top face and orientation for the puzzle 
-const dice =
-{
-    top: 1,
-    south: 2,
-    west: 4
-};
+let targetScore;
+let targetMoves;
 
-// Store starting dice orientation
-const diceStart =
-{
-    top: dice.top, south: dice.south, west: dice.west
-};
-
-let targetScore = 54;
-let targetMoves = 16;
-
-document.getElementById("targetscore").textContent = targetScore;
-document.getElementById("targetmoves").textContent = targetMoves;
-
-// create grid
 const diceGrid = document.getElementById("diceGrid");
 
-for (let row = 0; row < 8; row++) { // for grid 6x8
+// Set the days puzzle and retrieve values
+function loadPuzzle(puzzle)
+{
+    currentPuzzle = puzzle;
 
-    for (let column = 0; column < 6; column++) // for grid 6x8
+    grid = currentPuzzle.grid;
+    start = currentPuzzle.start;
+    end = currentPuzzle.end;
+
+    // set dice
+    dice =
     {
-        const tile = document.createElement("div");
+        top: currentPuzzle.dice.top,
+        south: currentPuzzle.dice.south,
+        west: currentPuzzle.dice.west
+    };
 
-        tile.classList.add("tile");
+    // retrieve dice orientation
+    diceStart =
+    {
+        top: dice.top, south: dice.south, west: dice.west
+    };
 
-        // check if the tile is visible or not
-        if (grid[row][column] === 1)
-        {
-            tile.classList.add("visible");
-        }
-        else
-        {
-            tile.classList.add("hidden");
-        }
+    targetScore = currentPuzzle.targetScore;
+    targetMoves = currentPuzzle.path.length;
+    
+    document.getElementById("targetscore").textContent = targetScore;
+    document.getElementById("targetmoves").textContent = targetMoves;
+}
+// ------------------------------------------------------------------------------- //
 
-        // check for start tile
-        if (row === start.row && column === start.column)
-        {
-            tile.classList.add("start");
-        }
-        // check for end tile
-        if (row === end.row && column === end.column)
-        {
-            tile.classList.add("end")
-        }
 
-        diceGrid.appendChild(tile);
+// ------------------------------------------------------------------------------- //
+//                                  DEV TOOLS                                      //
+// ------------------------------------------------------------------------------- //
+function selectPuzzle()
+{
+    const puzzle = puzzles.find(puzzle => puzzle.date === todayDate);
+
+    loadPuzzle(puzzle);
+}
+function forcePuzzle(devName)
+{
+    const puzzle = puzzles.find(puzzle => puzzle.devName === devName);
+
+    loadPuzzle(puzzle);
+
+    createGrid();
+    resetDice();
+}
+function forcePuzzle1()
+{
+    forcePuzzle("SetPuzzle1");
+}
+function forcePuzzle2()
+{
+    forcePuzzle("SetPuzzle2");
+}
+// --------------------------------------------------------------------------------//
+//                                  END OF DEV TOOLS                               //
+// --------------------------------------------------------------------------------//
+
+
+// Create the grid
+function createGrid()
+{
+    // Remove old tiles but keep the dice
+    diceGrid.querySelectorAll(".tile").forEach(tile => tile.remove());
+
+    for (let row = 0; row < 8; row++) { // for grid 6x8
+
+        for (let column = 0; column < 6; column++) // for grid 6x8
+        {
+            const tile = document.createElement("div");
+
+            tile.classList.add("tile");
+
+            // check if the tile is visible or not
+            if (grid[row][column] === 1)
+            {
+                tile.classList.add("visible");
+            }
+            else
+            {
+                tile.classList.add("hidden");
+            }
+
+            // check for start tile
+            if (row === start.row && column === start.column)
+            {
+                tile.classList.add("start");
+            }
+            // check for end tile
+            if (row === end.row && column === end.column)
+            {
+                tile.classList.add("end")
+            }
+
+            diceGrid.appendChild(tile);
+        }
     }
 }
+// --------------------------------------------------------------------------------//
+
+
+// --------------------------------------------------------------------------------//
+selectPuzzle();
+createGrid();
+// --------------------------------------------------------------------------------//
+
 
 // Set the other dice faces from orientation
 function getSides(number)
@@ -135,6 +184,7 @@ function updateDiceImage()
 
     diceImage.src = `Assets/Dice_side${dice.top}.png`;
 }
+// --------------------------------------------------------------------------------//
 
 // Start game
 let score = 0;
@@ -158,6 +208,7 @@ function canMoveTo(row, column)
 
     return true;
 }
+// --------------------------------------------------------------------------------//
 
 // handle dice location updates
 function move(direction)
@@ -232,6 +283,7 @@ function move(direction)
     // Check if dice reached the goal
     checkGoal();
 }
+// --------------------------------------------------------------------------------//
 
 // check if goal reached
 function checkGoal()
@@ -264,6 +316,7 @@ function checkGoal()
 
     }
 }
+// --------------------------------------------------------------------------------//
 
 // creating NESW roll functions for changing top number
     // and adding the new number to the score
@@ -331,7 +384,9 @@ function rollLeft() // Roll west / left
     document.getElementById("currentscore").textContent = score;
     console.log("score:", score);
 }
+// --------------------------------------------------------------------------------//
 
+// Puzzle reset
 function resetDice() // Reset puzzle for re-attempt
 {
     score = 0;
@@ -353,12 +408,14 @@ function resetDice() // Reset puzzle for re-attempt
 
     // reset dice visual
     updateDicePosition();
-    diceImage.src = `Assets/Dice_side${dice.top}.png`;
+    updateDiceImage();
 
     console.log("Dice reset to:", diceLocation.row, diceLocation.column);
     console.log("Dice orientation:", dice);
 }
+// --------------------------------------------------------------------------------//
 
+// Key controls for the game
 document.addEventListener("keydown", function(event)
 {
     // stop arrow keys from scrolling the page
@@ -393,5 +450,28 @@ document.addEventListener("keydown", function(event)
         case "r": case "R": case "Backspace":
             resetDice();
             break;
+        // ------------------------------------------------------- //
+
+        // ------------------------------------------------------- //
+        //                          DEV KEYS                       //
+        // ------------------------------------------------------- //
+        case "1":
+            forcePuzzle1();
+            break;
+        case "2":
+            forcePuzzle2();
+            break;
+        case "3":
+            forcePuzzle3();
+            break;
+        case "4":
+            forcePuzzle4();
+            break;
+        case "5":
+            forcePuzzle5();
+            break;
+        // ------------------------------------------------------- //
+        //                     END OF DEV TOOLS                    //
+        // ------------------------------------------------------- //
     }
 });

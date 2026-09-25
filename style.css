@@ -1,32 +1,74 @@
+*
+{
+    box-sizing: border-box;
+}
 :root
 {
     --gridsize: 60px;
-}
-:root{
     --dicesize: 40px;
 }
-
 body
 {
     margin: 0;
     font-family: 'Courier New', 'Times New Roman', 'Arial', Courier, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-
+header 
+{
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+main
+{
+    width: 100%;
+    background-color: #6b6969;
+    padding: 20px;
+    flex: 1;
+}
+footer
+{
+    background-color: #222;
+    color: white;
+    text-align: right;
+    padding: 20px;    
+}
 /* ------------------------------------------------ */
-/*           Style for the game dice grid           */
+/*                  Game area                       */
+#gameArea
+{
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 20px;
+}
+#gameInfo
+{
+    width: 260px;
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
 #diceGrid
 {
     display: grid;
-    grid-template-columns: repeat(8, var(--gridsize));
+    grid-template-columns: repeat(6, var(--gridsize));
     grid-template-rows: repeat(8, var(--gridsize));
 
-    width: 480px;
+    width: 360px;
     height: 480px;
-    margin: 0 auto;
 
     position: relative;
 }
-
+/* ------------------------------------------------ */
+/* -                    Game Grid                 - */
 .tile
 {
     width: var(--gridsize);
@@ -40,27 +82,22 @@ body
     border-top: 3px solid #000000;
     border-bottom: 3px solid #000000;
 }
-
 .tile.visible
 {
     background-color: #f7f7f7;
 }
-
 .tile.hidden
 {
     visibility: hidden;
 }
-
 .tile.start
 {
     background-color: #0dc529dd;
 }
-
 .tile.end
 {
     background-color: #c31616dd;
 }
-/* ------------------------------------------------ */
 /* ------------------------------------------------ */
 /*              Dice for the game                   */
 #dice
@@ -79,30 +116,3 @@ body
     display: block;
 }
 /* ------------------------------------------------ */
-/* ------------------------------------------------ */
-/* Style for the HTML */
-header 
-{
-    background-color: #222;
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
-
-main
-{
-    background-color: #6b6969;
-    text-align: left;
-    padding: 20px;
-    min-height: 500px;
-}
-
-footer
-{
-    background-color: #222;
-    color: white;
-    text-align: right;
-    padding: 10px;
-
-    
-}

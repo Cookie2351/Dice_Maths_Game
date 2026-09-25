@@ -15,28 +15,28 @@ const todayDate = getTodayDate();
 document.getElementById("puzzleDate").textContent = `Date ${todayDate}`;
 
 // visible grid
-const grid = // grid 8x8 - row 0-7, column 0-7
+const grid = // grid 6x8 - column 0-5, row 0-7
 [
-    [0, 0, 0, 1, 0, 0, 0, 0],
-    [0, 0, 1, 1, 1, 1, 0, 0],
-    [0, 0, 1, 0, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 0, 1, 1, 0, 0, 0],
-    [0, 0, 0, 1, 1, 0, 0, 0],
-    [0, 0, 1, 1, 1, 0, 0, 0],
-    [0, 0, 1, 1, 0, 0, 0, 0]
+    [0, 0, 1, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1],
+    [0, 1, 0, 1, 0, 0],
+    [0, 1, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0, 0],
+    [0, 0, 1, 1, 0, 0],
+    [0, 1, 1, 1, 0, 0],
+    [0, 1, 1, 0, 0, 0]
 ];
 
-// set start and end positions | grid 8x8 row0-7, column0-7
+// set start and end positions | grid 6x8 column 0-5, row 0-7
 const start =
 {
     row: 7,
-    column: 2
+    column: 1
 };
 const end =
 {
     row: 0,
-    column: 3
+    column: 2
 };
 
 // set the dice top face and orientation for the puzzle 
@@ -53,14 +53,18 @@ const diceStart =
     top: dice.top, south: dice.south, west: dice.west
 };
 
-let targetScore = 45;
+let targetScore = 54;
+let targetMoves = 16;
+
+document.getElementById("targetscore").textContent = targetScore;
+document.getElementById("targetmoves").textContent = targetMoves;
 
 // create grid
 const diceGrid = document.getElementById("diceGrid");
 
-for (let row = 0; row < 8; row++) { // for grid 8x8
+for (let row = 0; row < 8; row++) { // for grid 6x8
 
-    for (let column = 0; column < 8; column++) // for grid 8x8
+    for (let column = 0; column < 6; column++) // for grid 6x8
     {
         const tile = document.createElement("div");
 
@@ -141,7 +145,7 @@ updateDiceImage();
 function canMoveTo(row, column)
 {
     // Check if move position will be outside game grid
-    if (row < 0 || row >= 8 || column < 0 || column >= 8) // for grid 8x8
+    if (row < 0 || row >= 8 || column < 0 || column >= 6) // for grid 6x8
     {
         return false;
     }
@@ -200,6 +204,7 @@ function move(direction)
 
     // count moves
     rollCount++;
+    document.getElementById("rollcount").textContent = rollCount;
 
     console.log("Number of moves", rollCount);
     console.log("Dice grid position:", diceLocation.row, diceLocation.column);
@@ -275,6 +280,7 @@ function rollForward() // Roll north / up
 
     console.log("Rolled forwards");
     console.log("top from forwards roll:", dice.top);
+    document.getElementById("currentscore").textContent = score;
     console.log("score:", score);
 }
 function rollBackward() // Roll south / down
@@ -290,6 +296,7 @@ function rollBackward() // Roll south / down
 
     console.log("Rolled backwards");
     console.log("top from backwards roll:", dice.top);
+    document.getElementById("currentscore").textContent = score;
     console.log("score:", score);
 }
 function rollRight() // Roll east / right
@@ -305,6 +312,7 @@ function rollRight() // Roll east / right
 
     console.log("Rolled right");
     console.log("top from right roll:", dice.top);
+    document.getElementById("currentscore").textContent = score;
     console.log("score:", score);
 }
 function rollLeft() // Roll west / left
@@ -320,6 +328,7 @@ function rollLeft() // Roll west / left
 
     console.log("Rolled left");
     console.log("top from left roll:", dice.top);
+    document.getElementById("currentscore").textContent = score;
     console.log("score:", score);
 }
 
@@ -327,6 +336,9 @@ function resetDice() // Reset puzzle for re-attempt
 {
     score = 0;
     rollCount = 0;
+    document.getElementById("rollcount").textContent = rollCount;
+    document.getElementById("currentscore").textContent = score;
+
     gameEnd = false;
     // reset dice start location
     diceLocation.row = start.row;
@@ -341,6 +353,7 @@ function resetDice() // Reset puzzle for re-attempt
 
     // reset dice visual
     updateDicePosition();
+    diceImage.src = `Assets/Dice_side${dice.top}.png`;
 
     console.log("Dice reset to:", diceLocation.row, diceLocation.column);
     console.log("Dice orientation:", dice);
@@ -377,10 +390,8 @@ document.addEventListener("keydown", function(event)
             move("left");
             break;
 
-        case "r": case "R":
+        case "r": case "R": case "Backspace":
             resetDice();
             break;
     }
 });
-
-// console.log("Final score:", score);

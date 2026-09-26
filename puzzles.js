@@ -199,12 +199,12 @@ const puzzles =
 
         dice:       // set three sides so dice orientation and values can all be set
         {
-            top: 1,
+            top: 6,
             south: 5,
-            west: 3
+            west: 4
         },
 
-        targetScore: 32,    // set target score for game win
+        targetScore: 34,    // set target score for game win
 
         path:               // Get targetMoves from path    // index starts at 0
         [
@@ -263,6 +263,187 @@ const puzzles =
             "up",       // move 11
             "left",       // move 12
             "left",        // move 13 - move to end square
+        ],
+    },
+
+    {
+        date: "01/10/2026",
+        devName: "SetPuzzle7", // Set a dev command to select this puzzle
+
+        grid:       // grid 6x8, columns 0-5, rows 0-7    // index starts at 0
+        [
+            [0, 0, 0, 0, 1, 1],   // row 0
+            [0, 0, 1, 1, 1, 0],   // row 1
+            [1, 1, 1, 0, 0, 0],   // row 2
+            [1, 1, 1, 1, 0, 0],   // row 3
+            [1, 1, 0, 1, 0, 0],   // row 4
+            [0, 1, 0, 1, 0, 0],   // row 5
+            [1, 1, 1, 1, 0, 0],   // row 6
+            [0, 0, 0, 0, 0, 0]    // row 7
+        ],
+
+        start: { row: 6, column: 0 },   // square has to be visible
+        end:   { row: 0, column: 5 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 2,
+            south: 3,
+            west: 6
+        },
+
+        targetScore: 55,    // set target score for game win
+
+        path:               // Get targetMoves from path    // index starts at 0
+        [
+            "right",       // move 1 - move off start square - index 0
+            "right",          // move 2
+            "right",          // move 3
+            "up",          // move 4
+            "up",          // move 5       - index 4
+            "up",        // move 6
+            "left",          // move 7
+            "left",          // move 8
+            "up",       // move 9
+            "right",       // move 10
+            "up",       // move 11
+            "right",       // move 12
+            "right",        // move 13
+            "up",        // move 14
+            "right",        // move 15 - move to end square
+        ],
+    },
+
+    {
+        date: "02/10/2026",
+        devName: "SetPuzzle8", // Set a dev command to select this puzzle
+
+        grid:       // grid 6x8, columns 0-5, rows 0-7    // index starts at 0
+        [
+            [0, 0, 0, 0, 0, 0],   // row 0
+            [0, 1, 1, 1, 1, 0],   // row 1
+            [0, 1, 1, 1, 1, 0],   // row 2
+            [0, 1, 1, 0, 1, 0],   // row 3
+            [0, 1, 1, 1, 1, 0],   // row 4
+            [0, 0, 1, 1, 0, 0],   // row 5
+            [0, 0, 1, 1, 0, 0],   // row 6
+            [0, 0, 0, 0, 0, 0]    // row 7
+        ],
+
+        start: { row: 3, column: 2 },   // square has to be visible
+        end:   { row: 3, column: 4 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 5,
+            south: 6,
+            west: 4
+        },
+
+        targetScore: 42,    // set target score for game win
+
+        path:               // Get targetMoves from path    // index starts at 0
+        [
+            "left",       // move 1 - move off start square - index 0
+            "up",          // move 2
+            "up",          // move 3
+            "right",          // move 4
+            "down",          // move 5       - index 4
+            "right",        // move 6
+            "up",          // move 7
+            "right",          // move 8
+            "down",       // move 9
+            "down",       // move 10 - move to end square
+        ],
+    },
+
+    {
+        date: "03/10/2026",
+        devName: "SetPuzzle9", // Set a dev command to select this puzzle
+
+        grid:       // grid 6x8, columns 0-5, rows 0-7    // index starts at 0
+        [
+            [0, 0, 1, 1, 0, 0],   // row 0
+            [0, 0, 1, 1, 1, 0],   // row 1
+            [0, 0, 1, 0, 1, 0],   // row 2
+            [0, 0, 1, 0, 1, 1],   // row 3
+            [1, 1, 1, 1, 1, 1],   // row 4
+            [0, 1, 0, 1, 0, 0],   // row 5
+            [0, 1, 1, 1, 0, 0],   // row 6
+            [0, 0, 1, 1, 0, 0]    // row 7
+        ],
+
+        start: { row: 4, column: 0 },   // square has to be visible
+        end:   { row: 3, column: 5 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 1,
+            south: 3,
+            west: 2
+        },
+
+        targetScore: 54,    // set target score for game win
+
+        path:               // Get targetMoves from path    // index starts at 0
+        [
+            "right",       // move 1 - move off start square - index 0
+            "right",          // move 2
+            "up",          // move 3
+            "up",          // move 4
+            "up",          // move 5       - index 4
+            "up",        // move 6
+            "right",          // move 7
+            "down",          // move 8
+            "right",       // move 9
+            "down",       // move 10
+            "down",       // move 11
+            "down",       // move 12
+            "right",        // move 13
+            "up",        // move 14 - move to end square
+        ],
+    },
+
+    {
+        date: "04/10/2026",
+        devName: "CurrentPuzzle", // Set a dev command to select this puzzle
+
+        grid:       // grid 6x8, columns 0-5, rows 0-7    // index starts at 0
+        [
+            [0, 1, 0, 0, 0, 0],   // row 0
+            [0, 1, 1, 1, 1, 0],   // row 1
+            [0, 1, 1, 0, 1, 0],   // row 2
+            [0, 0, 1, 0, 1, 0],   // row 3
+            [0, 1, 1, 1, 1, 0],   // row 4
+            [0, 1, 1, 1, 0, 0],   // row 5
+            [0, 0, 0, 1, 1, 1],   // row 6
+            [0, 0, 0, 0, 0, 0]    // row 7
+        ],
+
+        start: { row: 0, column: 1 },   // square has to be visible
+        end:   { row: 6, column: 5 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 4,
+            south: 1,
+            west: 2
+        },
+
+        targetScore: 36,    // set target score for game win
+
+        path:               // Get targetMoves from path    // index starts at 0
+        [
+            "down",       // move 1 - move off start square - index 0
+            "down",          // move 2
+            "right",          // move 3
+            "down",          // move 4
+            "down",          // move 5       - index 4
+            "right",        // move 6
+            "down",          // move 7
+            "down",          // move 8
+            "right",       // move 9
+            "right",       // move 10 - move to end square
         ],
     },
 // -------------------------------------------------------------------------------- //

@@ -67,6 +67,15 @@ footer
 
     position: relative;
 }
+#rollGuide
+{
+    width: clamp(10px, 20vw, 10px);
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 @media (max-width: 600px)
 {
     #gameArea
@@ -76,6 +85,11 @@ footer
     }
 
     #gameInfo
+    {
+        width: 100%;
+        max-width: 360px;
+    }
+    #rollGuide
     {
         width: 100%;
         max-width: 360px;
@@ -114,11 +128,11 @@ footer
 }
 .tile.start
 {
-    background-color: #0dc529dd;
+    background-color: #c31616dd;
 }
 .tile.end
 {
-    background-color: #c31616dd;
+    background-color: #0dc529dd;
 }
 /* ------------------------------------------------ */
 /*              Dice for the game                   */

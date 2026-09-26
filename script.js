@@ -107,6 +107,24 @@ function forcePuzzle6()
 {
     forcePuzzle("SetPuzzle6");
 }
+function forcePuzzle7()
+{
+    forcePuzzle("SetPuzzle7");
+}
+function forcePuzzle8()
+{
+    forcePuzzle("SetPuzzle8");
+}
+function forcePuzzle9()
+{
+    forcePuzzle("SetPuzzle9");
+}
+
+// ----------------------------------- //
+function forcePuzzleQ()
+{
+    forcePuzzle("CurrentPuzzle");
+}
 
 function forcePuzzle0()
 {
@@ -209,10 +227,19 @@ updateDicePosition();
 function updateDiceImage()
 {
     const diceImage = document.getElementById("diceImage");
+    const rollGuideTop = document.getElementById("rollGuideTop");
+    const rollGuideUp = document.getElementById("rollGuideUp");
+    const rollGuideLeft = document.getElementById("rollGuideLeft");
+    const rollGuideRight = document.getElementById("rollGuideRight");
+    const rollGuideDown = document.getElementById("rollGuideDown");
 
     diceImage.src = `Assets/Dice_side${dice.top}.png`;
+    rollGuideTop.src = `Assets/Dice_side${dice.top}.png`;
+    rollGuideUp.src = `Assets/Dice_side${dice.south}.png`;      // inverted - moving up shows south side
+    rollGuideLeft.src = `Assets/Dice_side${dice.east}.png`;     // inverted - moving left shows east side
+    rollGuideRight.src = `Assets/Dice_side${dice.west}.png`;    // inverted - moving right shows west side
+    rollGuideDown.src = `Assets/Dice_side${dice.north}.png`;    // inverted - moving down shows north side
 }
-
 window.addEventListener("resize", function()
 {
     updateDicePosition();
@@ -566,6 +593,11 @@ document.addEventListener("keydown", function(event)
             break;
         case "9":
             forcePuzzle9();
+            break;
+
+
+        case "q": case "Q":
+            forcePuzzleQ();
             break;
 
         case "0":

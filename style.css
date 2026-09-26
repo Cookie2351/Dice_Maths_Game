@@ -69,13 +69,111 @@ footer
 }
 #rollGuide
 {
-    width: clamp(10px, 20vw, 10px);
-    flex-shrink: 0;
+    --dice-size: clamp(35px, 6vw, 60px);
+    --gap: calc(var(--dice-size) * 0.35);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    position: relative;
+
+    grid-template-columns:
+        var(--dice-size)
+        var(--gap)
+        var(--dice-size)
+        var(--gap)
+        var(--dice-size);
+
+    grid-template-rows:
+        var(--dice-size)
+        var(--gap)
+        var(--dice-size)
+        var(--gap)
+        var(--dice-size);
+
+    grid-template-areas:
+        ".    .     up   .    ."
+        ".    .     .    .    ."
+        "left .     top  .    right"
+        ".    .     .    .    ."
+        ".    .     down .    ." 
+    ;
+
+    justify-content: center;
+    align-items: center;
+
+    width: calc(var(--dice-size) * 3 + var(--gap) * 2);
+    height: calc(var(--dice-size) * 3 + var(--gap) * 2);
+
+    flex-shrink: 0;
 }
+#rollGuide span
+{
+    position: absolute;
+
+    font-size: calc(var(--dice-size) * 0.4);
+    font-weight: bold;
+
+    z-index: 10;
+}
+#rollGuideTop
+{
+    grid-area: top;
+    transform: scale(1.33);
+}
+#rollGuideUp
+{
+    grid-area: up;
+}
+#rollGuideDown
+{
+    grid-area: down;
+}
+#rollGuideLeft
+{
+    grid-area: left;
+}
+#rollGuideRight
+{
+    grid-area: right;
+}
+#rollGuide img
+{
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+#arrowUp
+{
+    left: 50%;
+    top: calc(var(--dice-size) + var(--gap) / 2);
+    transform: translate(-50%, -50%);
+}
+
+#arrowDown
+{
+    left: 50%;
+    top: calc(
+        var(--dice-size) * 2 +
+        var(--gap) * 1.5
+    );
+    transform: translate(-50%, -50%);
+}
+#arrowLeft
+{
+    left: calc(var(--dice-size) + var(--gap) / 2);
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#arrowRight
+{
+    left: calc(
+        var(--dice-size) * 2 +
+        var(--gap) * 1.5
+    );
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 @media (max-width: 600px)
 {
     #gameArea
@@ -85,11 +183,6 @@ footer
     }
 
     #gameInfo
-    {
-        width: 100%;
-        max-width: 360px;
-    }
-    #rollGuide
     {
         width: 100%;
         max-width: 360px;

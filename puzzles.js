@@ -406,7 +406,7 @@ const puzzles =
 
     {
         date: "04/10/2026",
-        devName: "CurrentPuzzle", // Set a dev command to select this puzzle
+        devName: "SetPuzzle10", // Set a dev command to select this puzzle
 
         grid:       // grid 6x8, columns 0-5, rows 0-7    // index starts at 0
         [
@@ -446,6 +446,63 @@ const puzzles =
             "right",       // move 10 - move to end square
         ],
     },
+
+    //-------------------------------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+    //                                  TEST PUZZLE LAYOUT AND DICE                                          //
+    //-------------------------------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+    {
+        date: "TEST PUZZLE",
+        devName: "CurrentPuzzle", // Set a dev command to select this puzzle
+
+        grid:       // grid 6x8, columns 0-5, rows 0-7    // index starts at 0
+        [
+            [0, 0, 1, 1, 1, 0],   // row 0
+            [0, 0, 1, 1, 1, 0],   // row 1
+            [0, 0, 1, 1, 1, 0],   // row 2
+            [0, 0, 1, 1, 1, 0],   // row 3
+            [0, 0, 1, 1, 1, 0],   // row 4
+            [0, 0, 1, 1, 1, 0],   // row 5
+            [0, 0, 1, 1, 1, 0],   // row 6
+            [0, 0, 1, 1, 1, 0]    // row 7
+        ],
+
+        start: { row: 7, column: 2 },   // square has to be visible
+        end:   { row: 0, column: 4 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 1,
+            south: 1,
+            west: 1
+        },
+
+        targetScore: 36,    // set target score for game win
+
+        path:               // Get targetMoves from path    // index starts at 0
+        [
+            "up",       // move 1 - move off start square - index 0
+            "up",          // move 2
+            "up",          // move 3
+            "up",          // move 4
+            "up",          // move 5       - index 4
+            "up",        // move 6
+            "up",          // move 7
+            "right",          // move 8
+            "down",       // move 9
+            "right",       // move 10
+            "up",       // move 11 - move to end square
+            "",         // extra move for testing wrong moves correct score
+            "",         // extra move for testing wrong moves correct score
+        ],
+    },
+    //-------------------------------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------------------------------------------//
+
+
 // -------------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------------- //
 //                                  Blank Puzzle                                    //

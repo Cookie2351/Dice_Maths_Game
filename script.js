@@ -27,6 +27,7 @@ let end;
 let dice;
 
 let diceStart;
+let gameLocked = false;
 
 let targetScore;
 let targetMoves;
@@ -267,7 +268,8 @@ let rollCount = 0;
 let gameEnd = false;
 
 let canMove = true;
-const moveDelay = 150; // milliseconds      - set same as CSS dice roll speed
+const Delay = 350; //milliseconds    - set for normal colour reset
+const moveDelay = 100; // milliseconds      - set for dice roll movement input delay
 const failDelay = 1500; // milliseconds      - for the CSS fail colour flash
 const winDelay = 3000;  // milliseconds     - for winning colour flash
 
@@ -389,14 +391,25 @@ function checkGoal()
     {
         if (score === targetScore)
         {
-            gameEnd = true;
+            if (rollCount === targetMoves)
+            {
+                gameEnd = true;
+                console.log("Success! Score reached:", score);
+                console.log("Rolls:", rollCount);
 
-            console.log("Success! Score reached:", score);
-            console.log("Rolls:", rollCount);
+                flashWin();
+                showSuccessPanel();
 
-            flashWin();
+            }
+            else
+            {
+                console.log("Score reach but wrong moves");
+                console.log("Rolls:", rollCount, "Target:", targetMoves);
 
-            setTimeout(() => winDelay);
+                flashClose();
+                showClosePanel()
+
+            }
         }
         else
         {
@@ -404,17 +417,80 @@ function checkGoal()
             console.log("Target score:", targetScore);
             console.log("Resetting puzzle...");
             
+            gameLocked = true;
             flashFail();
 
             setTimeout(() =>
             {
                 resetDice();
+                gameLocked = false;
             }, failDelay);
         }
 
 
     }
 }
+
+// --------------------------------------------------------------------------------//
+//                              Game Panels                                        //
+// --------------------------------------------------------------------------------//
+
+// Game Success Panel
+function showSuccessPanel()
+{
+    const gameEndPanel = document.getElementById("gameEndPanel");
+    const gameEndTitle = document.getElementById("gameEndTitle");
+    const gameEndMessage = document.getElementById("gameEndMessage");
+    const gameEndStats = document.getElementById("gameEndStats");
+    const gameEndButton = document.getElementById("gameEndButton");
+
+    gameEndPanel.className = "success";
+
+    gameEndTitle.textContent = "Puzzle Complete!";
+    
+
+    gameEndMessage.textContent =
+        "You solved today's puzzle!";
+
+    gameEndStats.textContent =
+        `Score: ${score} | Moves: ${rollCount}`;
+
+    gameEndButton.textContent = "Play Again";
+
+    gameEndPanel.style.display = "flex";
+    
+}
+// Game Close Panel
+function showClosePanel()
+{
+    const gameEndPanel = document.getElementById("gameEndPanel");
+    const gameEndTitle = document.getElementById("gameEndTitle");
+    const gameEndMessage = document.getElementById("gameEndMessage");
+    const gameEndStats = document.getElementById("gameEndStats");
+    const gameEndButton = document.getElementById("gameEndButton");
+
+    gameEndPanel.className = "close";
+
+    gameEndTitle.textContent = "Close one - try again";
+
+    gameEndMessage.textContent =
+        "Looks like you got the score but not the right number of moves.";
+
+    gameEndStats.textContent =
+        `Moves: ${rollCount} | Target Moves: ${targetMoves}`;
+
+    gameEndButton.textContent = "Try Again";
+
+    gameEndPanel.style.display = "flex";
+}
+
+gameEndButton.addEventListener("click", function()
+{
+    // Reset the game
+    resetDice();
+});
+
+// --------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------//
 
 // creating NESW roll functions for changing top number
@@ -497,12 +573,12 @@ function resetDice() // Reset puzzle for re-attempt
     updateDicePosition();
     updateDiceImage();
 
-    console.log("Dice reset to:", diceLocation.row, diceLocation.column);
-    console.log("Dice orientation:", dice);
+    // remove panel
+    document.getElementById("gameEndPanel").style.display = "none";
 }
 // --------------------------------------------------------------------------------//
 
-// Change the grid colour on puzzle failure
+// Change the grid colour on puzzle failure / win and close
 function flashFail()
 {
     const visibleTiles = diceGrid.querySelectorAll(".tile.visible");
@@ -520,7 +596,6 @@ function flashFail()
         });
     }, failDelay);
 }
-
 function flashWin()
 {
     const visibleTiles = diceGrid.querySelectorAll(".tile.visible");
@@ -538,6 +613,43 @@ function flashWin()
         });
     }, winDelay);
 }
+function flashClose()
+{
+    const visibleTiles = diceGrid.querySelectorAll(".tile.visible");
+
+    visibleTiles.forEach(tile =>
+    {
+        tile.classList.add("close");
+    });
+
+    setTimeout(() =>
+    {
+        visibleTiles.forEach(tile =>
+        {
+            tile.classList.remove("close");
+        });
+    }, winDelay);
+}
+function flashNormal()
+{
+    const visibleTiles = diceGrid.querySelectorAll(".tile.visible");
+
+    visibleTiles.forEach(tile =>
+    {
+        tile.classList.remove("close");
+        tile.classList.remove("win");
+        tile.classList.remove("fail");
+        tile.classList.add("normal");
+    });
+
+    setTimeout(() =>
+    {
+        visibleTiles.forEach(tile =>
+        {
+            tile.classList.remove("normal");
+        });
+    }, Delay);
+}
 
 // --------------------------------------------------------------------------------//
 
@@ -554,28 +666,34 @@ document.addEventListener("keydown", function(event)
         event.preventDefault();
     }
 
+    // lock game for game failed reset to stop accidental double reset
+    if (gameLocked)
+    {
+        return;
+    }
+
     // set controls for the dice rolling
     switch (event.key)
     {
+        case "r": case "R": case "Backspace":
+            resetDice();
+            // reset background colour
+            flashNormal()
+            break;
+
         case "ArrowUp": case "w": case "W":
             move("forward");
             break;
-
         case "ArrowDown": case "s": case"S":
             move("backward");
             break;
-
         case "ArrowRight": case "d": case "D":
             move("right");
             break;
-
         case "ArrowLeft": case "a": case "A":
             move("left");
             break;
 
-        case "r": case "R": case "Backspace":
-            resetDice();
-            break;
         // ------------------------------------------------------- //
 
         // ------------------------------------------------------- //
@@ -613,7 +731,6 @@ document.addEventListener("keydown", function(event)
         case "q": case "Q":
             forcePuzzleQ();
             break;
-
         case "0":
             forcePuzzle0();
             break;

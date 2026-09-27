@@ -1,0 +1,27 @@
+Rolledle - Help Me
+
+Controls:
+movement: arrows "up", "left", "down", "right" | "W" "A" "S" "D"
+reset: "r"
+buttons: click / "mouse 1"
+
+
+Force Puzzles / dev tools:
+Puzzles 1-9: keys 1,2,3,4,5,6,7,8,9
+
+
+
+How to play:
+The game requires you to roll the dice across the grid from the start (red tile) to the goal (green tile) with the additional goal requirement of reaching the target score and number of moves at that goal tile.
+Score is calculated from the top facing number of the dice with each player move (e.g. roll up and dice shows 4 - adds +4 to the score and +1 move).
+Number of moves is calculated by each dice movement (e.g. roll right - adds +1 move).
+
+The player must take care in choosing their rolls so they reach the target score in the target moves as they reach the goal (e.g. Score 33 in Moves 10).
+
+The game is simple in design but hard in playing.
+
+Enjoy!
+:)
+
+Designed by,
+Andrew Cook

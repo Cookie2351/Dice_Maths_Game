@@ -69,8 +69,13 @@ footer
 }
 #rollGuide
 {
+    transform: scale(0.75);
+    transform-origin: left;
+}
+#rollGuide
+{
     --dice-size: clamp(35px, 6vw, 60px);
-    --gap: calc(var(--dice-size) * 0.35);
+    --gap: clamp(20px, 4vw, 30px);
 
     display: grid;
     position: relative;
@@ -94,8 +99,7 @@ footer
         ".    .     .    .    ."
         "left .     top  .    right"
         ".    .     .    .    ."
-        ".    .     down .    ." 
-    ;
+        ".    .     down .    .";
 
     justify-content: center;
     align-items: center;
@@ -105,73 +109,59 @@ footer
 
     flex-shrink: 0;
 }
-#rollGuide span
-{
-    position: absolute;
-
-    font-size: calc(var(--dice-size) * 0.4);
-    font-weight: bold;
-
-    z-index: 10;
-}
-#rollGuideTop
-{
-    grid-area: top;
-    transform: scale(1.33);
-}
-#rollGuideUp
-{
-    grid-area: up;
-}
-#rollGuideDown
-{
-    grid-area: down;
-}
-#rollGuideLeft
-{
-    grid-area: left;
-}
-#rollGuideRight
-{
-    grid-area: right;
-}
 #rollGuide img
 {
     width: 80%;
     height: 80%;
     object-fit: contain;
 }
-#arrowUp
+#rollGuideTop
 {
-    left: 50%;
-    top: calc(var(--dice-size) + var(--gap) / 2);
-    transform: translate(-50%, -50%);
+    grid-area: top;
+    transform: scale(1.33);
 }
 
+#rollGuideUp
+{
+    grid-area: up;
+}
+
+#rollGuideDown
+{
+    grid-area: down;
+}
+
+#rollGuideLeft
+{
+    grid-area: left;
+}
+
+#rollGuideRight
+{
+    grid-area: right;
+}
+#arrowUp
+{
+    grid-column: 3;
+    grid-row: 2;
+}
 #arrowDown
 {
-    left: 50%;
-    top: calc(
-        var(--dice-size) * 2 +
-        var(--gap) * 1.5
-    );
-    transform: translate(-50%, -50%);
+    grid-column: 3;
+    grid-row: 4;
 }
 #arrowLeft
 {
-    left: calc(var(--dice-size) + var(--gap) / 2);
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
+    grid-column: 2;
+    grid-row: 3;
 
+    transform: translateX(-4px);
+}
 #arrowRight
 {
-    left: calc(
-        var(--dice-size) * 2 +
-        var(--gap) * 1.5
-    );
-    top: 50%;
-    transform: translate(-50%, -50%);
+    grid-column: 4;
+    grid-row: 3;
+    transform: translateX(-2px);
 }
 
 @media (max-width: 600px)
@@ -184,8 +174,9 @@ footer
 
     #gameInfo
     {
-        width: 100%;
+        width: 80%;
         max-width: 360px;
+        transform: translateX(30px);
     }
 }
 /* ------------------------------------------------ */

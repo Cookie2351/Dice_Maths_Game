@@ -210,16 +210,20 @@ const diceElement = document.getElementById("dice");
 
 function updateDicePosition()
 {
-    const tileSize = diceGrid.clientWidth / 6;
-    const diceSize = diceElement.offsetWidth;
+    const tileWidth = diceGrid.clientWidth / 6;
+    const tileHeight = diceGrid.clientHeight / 8;
 
-    const offset = (tileSize - diceSize) / 2;
+    const diceWidth = diceElement.offsetWidth;
+    const diceHeight = diceElement.offsetHeight;
+
+    const offsetX = (tileWidth - diceWidth) / 2;
+    const offsetY = (tileHeight - diceHeight) / 2;
 
     diceElement.style.left =
-        `${diceLocation.column * tileSize + offset}px`;
+        `${diceLocation.column * tileWidth + offsetX}px`;
 
     diceElement.style.top =
-        `${diceLocation.row * tileSize + offset}px`;
+        `${diceLocation.row * tileHeight + offsetY}px`;
 }
 
 updateDicePosition();
@@ -233,12 +237,22 @@ function updateDiceImage()
     const rollGuideRight = document.getElementById("rollGuideRight");
     const rollGuideDown = document.getElementById("rollGuideDown");
 
+    const arrowUp = document.getElementById("arrowUp");
+    const arrowLeft = document.getElementById("arrowLeft");
+    const arrowRight = document.getElementById("arrowRight");
+    const arrowDown = document.getElementById("arrowDown");
+
     diceImage.src = `Assets/Dice_side${dice.top}.png`;
     rollGuideTop.src = `Assets/Dice_side${dice.top}.png`;
     rollGuideUp.src = `Assets/Dice_side${dice.south}.png`;      // inverted - moving up shows south side
     rollGuideLeft.src = `Assets/Dice_side${dice.east}.png`;     // inverted - moving left shows east side
     rollGuideRight.src = `Assets/Dice_side${dice.west}.png`;    // inverted - moving right shows west side
     rollGuideDown.src = `Assets/Dice_side${dice.north}.png`;    // inverted - moving down shows north side
+
+    arrowUp.src = `Assets/Arrow_UP.png`;
+    arrowLeft.src = `Assets/Arrow_LEFT.png`;
+    arrowRight.src = `Assets/Arrow_RIGHT.png`;
+    arrowDown.src = `Assets/Arrow_DOWN.png`;
 }
 window.addEventListener("resize", function()
 {

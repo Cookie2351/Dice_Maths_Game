@@ -142,9 +142,9 @@ function createGrid()
     // Remove old tiles but keep the dice
     diceGrid.querySelectorAll(".tile").forEach(tile => tile.remove());
 
-    for (let row = 0; row < 8; row++) { // for grid 6x8
+    for (let row = 0; row < 5; row++) { // for grid 5x5
 
-        for (let column = 0; column < 6; column++) // for grid 6x8
+        for (let column = 0; column < 5; column++) // for grid 5x5
         {
             const tile = document.createElement("div");
 
@@ -211,8 +211,8 @@ const diceElement = document.getElementById("dice");
 
 function updateDicePosition()
 {
-    const tileWidth = diceGrid.clientWidth / 6;
-    const tileHeight = diceGrid.clientHeight / 8;
+    const tileWidth = diceGrid.clientWidth / 5;
+    const tileHeight = diceGrid.clientHeight / 5;
 
     const diceWidth = diceElement.offsetWidth;
     const diceHeight = diceElement.offsetHeight;
@@ -278,7 +278,7 @@ updateDiceImage();
 function canMoveTo(row, column)
 {
     // Check if move position will be outside game grid
-    if (row < 0 || row >= 8 || column < 0 || column >= 6) // for grid 6x8
+    if (row < 0 || row >= 5 || column < 0 || column >= 5) // for grid 5x5
     {
         return false;
     }
@@ -399,7 +399,6 @@ function checkGoal()
 
                 flashWin();
                 showSuccessPanel();
-
             }
             else
             {
@@ -408,7 +407,6 @@ function checkGoal()
 
                 flashClose();
                 showClosePanel()
-
             }
         }
         else

@@ -46,7 +46,7 @@ footer
 {
     width: 100%;
     display: flex;
-    align-items: stretch;
+    align-items: flex-start;
     justify-content: center;
     gap: 20px;
 }
@@ -63,18 +63,19 @@ footer
 #diceGrid
 {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
 
     width: min(90vw, 360px, 37.5vh);
-    aspect-ratio: 6 / 8;
+    height: min(90vw, 360px, 37.5vh);
+    aspect-ratio: 1 / 1;
 
     position: relative;
 }
 #rollGuide
 {
-    transform: scale(0.75);
-    transform-origin: left;
+    transform: translateX(-40px) scale(0.6);
+    transform-origin: center;
 }
 #rollGuide
 {
@@ -234,7 +235,8 @@ footer
 /*              Dice for the game                   */
 #dice
 {
-    width: calc((100% / 6) * 0.67);
+    width: calc((100% / 5) * 0.67);
+    height: calc((100% / 5) * 0.67);
     aspect-ratio: 1;
     
     position: absolute;
@@ -295,7 +297,7 @@ footer
 {
     background-color: #5d95d9;
 }
-#gameEndPanel.succes #gameEndButton:hover
+#gameEndPanel.success #gameEndButton:hover
 {
     background-color: #506886;
 }

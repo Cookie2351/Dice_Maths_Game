@@ -359,10 +359,10 @@ let gameEnd = false;
 
 let canMove = true;
 const Delay = 350; //milliseconds    - set for normal colour reset
-const previewDelay = 1000; //milliseconds    - set for delay before showing previews
+const previewDelay = 300; //milliseconds    - set for delay before showing previews
 const moveDelay = 100; // milliseconds      - set for dice roll movement input delay
 const failDelay = 1500; // milliseconds      - for the CSS fail colour flash
-const winDelay = 3000;  // milliseconds     - for winning colour flash
+const winDelay = 5000;  // milliseconds     - for winning colour flash
 
 updateDiceImage();
 
@@ -370,7 +370,7 @@ updateDiceImage();
 setTimeout(() =>
 {
     updateMovementPreviews();
-}, (previewDelay * 2));               // set delay before showing move preview
+}, (previewDelay * 6));               // set delay before showing move preview
 
 function canMoveTo(row, column)
 {
@@ -599,6 +599,7 @@ gameEndButton.addEventListener("click", function()
 {
     // Reset the game
     resetDice();
+    flashNormal();
 });
 
 // --------------------------------------------------------------------------------//
@@ -697,7 +698,7 @@ function resetDice() // Reset puzzle for re-attempt
     setTimeout(() =>
     {
         updateMovementPreviews();
-    }, (previewDelay * 2));               // set delay before showing move preview
+    }, (previewDelay * 3));               // set delay before showing move preview
 
 
     // remove panel

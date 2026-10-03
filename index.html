@@ -10,6 +10,7 @@
 
 <body>
 
+    <!-- HEADING -->
     <header>
         <h1>ROLLdle</h1>
         <p>
@@ -20,62 +21,66 @@
 
     <main>
             <br>
-            <div id="gameArea">
 
-                <div id="gameInfo">
+            <div id="gameInfo">
 
-                    <div id="gameTargetStats">
-                        <div class="statRow">
-                            <span>Current Score</span>
-                            <span>:</span>
-                            <span id="currentscore">0</span>
-                        </div>
+                <!-- Game Stats -->
+                <div id="gameStats">
 
-                        <div class="statRow">
-                            <span>Target Score</span>
-                            <span>:</span>
-                            <span id="targetscore">0</span>
-                        </div>
-                    </div>
-                    <br>
-                    <div id="gameStats">
-                        <div class="statRow">
-                            <span>Current Moves</span>
-                            <span>:</span>
-                            <span id="rollcount">0</span>
-                        </div>
-
-                        <div class="statRow">
-                            <span>Moves Hint</span>
-                            <span>:</span>
-                            <span id="targetmoves">0</span>
-                        </div>
+                    <div class="statRow">
+                        <h3>Current Score</h3>
+                        <h3>:</h3>
+                        <h3 id="currentscore">0</h3>
                     </div>
 
-                    <div id="rollGuide">
-                        <img id="rollGuideTop" src="Assets/Dice_side1.png" alt="RollTop">
-                        <img id="rollGuideUp" src="Assets/Dice_side1.png" alt="RollUp">
-                        <img id="rollGuideLeft" src="Assets/Dice_side1.png" alt="RollLeft">
-                        <img id="rollGuideRight" src="Assets/Dice_side1.png" alt="RollRight">
-                        <img id="rollGuideDown" src="Assets/Dice_side1.png" alt="RollDown">
-
-                        <img id="arrowUp" src="Assets/Arrow_UP.png" alt="Up">
-                        <img id="arrowLeft" src="Assets/Arrow_LEFT.png" alt="Left">
-                        <img id="arrowRight" src="Assets/Arrow_RIGHT.png" alt="Right">
-                        <img id="arrowDown" src="Assets/Arrow_DOWN.png" alt="Down">
+                    <div class="statRow">
+                        <h3>Target Score</h3>
+                        <h3>:</h3>
+                        <h3 id="targetscore">29</h3>
                     </div>
-                    
+
+                    <div class="statRow">
+                        <h3>Current Moves</h3>
+                        <h3>:</h3>
+                        <h3 id="rollcount">0</h3>
+                    </div>
+
+                    <div class="statRow">
+                        <h3>Moves Hint</h3>
+                        <h3>:</h3>
+                        <h3 id="targetmoves">10</h3>
+                    </div>
+
                 </div>
 
+                <!-- Dice Grid -->
                 <div id="diceGrid">
                     <div id="dice">
                         <img id="diceImage" src="Assets/Dice_side1.png" alt="Dice">
                     </div>
                 </div>
 
+                <!-- Roll Guide -->
+                <div id="rollGuide">
+                    <img id="rollGuideTop" src="Assets/Dice_side1.png" alt="RollTop">
+                    <img id="rollGuideUp" src="Assets/Dice_side1.png" alt="RollUp">
+                    <img id="rollGuideLeft" src="Assets/Dice_side1.png" alt="RollLeft">
+                    <img id="rollGuideRight" src="Assets/Dice_side1.png" alt="RollRight">
+                    <img id="rollGuideDown" src="Assets/Dice_side1.png" alt="RollDown">
+
+                    <img id="arrowUp" src="Assets/Arrow_UP.png" alt="Up">
+                    <img id="arrowLeft" src="Assets/Arrow_LEFT.png" alt="Left">
+                    <img id="arrowRight" src="Assets/Arrow_RIGHT.png" alt="Right">
+                    <img id="arrowDown" src="Assets/Arrow_DOWN.png" alt="Down">
+                </div>
+                
             </div>
+
+
+
     </main>
 
+    <!-- Game Panels -->
     <div id="gameEndPanel">
         <div id="gameEndBox">
 

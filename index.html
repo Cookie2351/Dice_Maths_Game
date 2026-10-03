@@ -19,45 +19,56 @@
         </p>
     </header>
 
-    <main>
-            <br>
+    <main>                                  <!--------------------  MAIN ------------------------>
+        <br>
 
-            <div id="gameInfo">
+        <div id="gameInfo">
 
-                <!-- Game Stats -->
-                <div id="gameStats">
+            <!-- Top Stats -->
+            <div id="gameStats">
+
+                <div class="statRow">
+                    <h3>Score</h3>
+                    <h3>:</h3>
+                    <h3 id="currentscore">0</h3>
+                </div>
+
+                <div class="statRow">
+                    <h3>Target Score</h3>
+                    <h3>:</h3>
+                    <h3 id="targetscore">29</h3>
+                </div>
+
+            </div> <!--close top stats-->
+
+
+            <!-- GRID -->
+            <div id="diceGrid">
+
+                <div id="dice">
+                    <img id="diceImage" src="Assets/Dice_side1.png" alt="Dice">
+                </div>
+
+            </div><!--close grid-->
+
+
+            <!-- Other Stats -->
+            <div id="sideInfo">
+
+                <div id="moveStats">
 
                     <div class="statRow">
-                        <h3>Current Score</h3>
-                        <h3>:</h3>
-                        <h3 id="currentscore">0</h3>
-                    </div>
-
-                    <div class="statRow">
-                        <h3>Target Score</h3>
-                        <h3>:</h3>
-                        <h3 id="targetscore">29</h3>
-                    </div>
-
-                    <div class="statRow">
-                        <h3>Current Moves</h3>
+                        <h3>Moves</h3>
                         <h3>:</h3>
                         <h3 id="rollcount">0</h3>
                     </div>
 
                     <div class="statRow">
-                        <h3>Moves Hint</h3>
+                        <h3>Hint</h3>
                         <h3>:</h3>
                         <h3 id="targetmoves">10</h3>
                     </div>
 
-                </div>
-
-                <!-- Dice Grid -->
-                <div id="diceGrid">
-                    <div id="dice">
-                        <img id="diceImage" src="Assets/Dice_side1.png" alt="Dice">
-                    </div>
                 </div>
 
                 <!-- Roll Guide -->
@@ -74,38 +85,39 @@
                     <img id="arrowDown" src="Assets/Arrow_DOWN.png" alt="Down">
                 </div>
                 
+            </div> <!--close other stats-->
+
+        </div> <!--close game info-->
+
+    </main>                                 <!-----------------  CLOSE MAIN --------------------->
+
+        <!-- Game Panels -->
+        <div id="gameEndPanel">
+            <div id="gameEndBox">
+
+                <h2 id="gameEndTitle">Puzzle Complete!</h2>
+
+                <p id="gameEndMessage">
+                    You solved today's puzzle!
+                </p>
+
+                <p id="gameEndStats"></p>
+
+                <button id="gameEndButton" onclick="resetDice()">
+                    Play Again
+                </button>
+
             </div>
-
-
-
-    </main>
-
-    <!-- Game Panels -->
-    <div id="gameEndPanel">
-        <div id="gameEndBox">
-
-            <h2 id="gameEndTitle">Puzzle Complete!</h2>
-
-            <p id="gameEndMessage">
-                You solved today's puzzle!
-            </p>
-
-            <p id="gameEndStats"></p>
-
-            <button id="gameEndButton" onclick="resetDice()">
-                Play Again
-            </button>
-
-        </div>
-    </div>
+        </div> <!--close game panels-->
 
     <footer>
         <h3 id="puzzleDate"></h3>
         <p>Daily streak at X!</p>
     </footer>
 
-    <script src="puzzles.js"></script>
-    <script src="script.js"></script>
+<script src="puzzles.js"></script>     <!------------------  PUZZLE SCRIPT ---------------------->
+<script src="script.js"></script>      <!------------------   MAIN SCRIPT  ---------------------->
 
 </body>
+
 </html>

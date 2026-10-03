@@ -32,6 +32,8 @@ let gameLocked = false;
 let targetScore;
 let targetMoves;
 
+let previewTimeout;
+
 const diceGrid = document.getElementById("diceGrid");
 
 // Set the days puzzle and retrieve values
@@ -404,6 +406,9 @@ function move(direction)
         return;
     }
 
+    // Cancel any queued preview
+    clearTimeout(previewTimeout);
+
     // Remove current movement previews so can reapply after movement
     diceGrid.querySelectorAll(".movementPreview").forEach(preview =>
     {
@@ -474,8 +479,8 @@ function move(direction)
     // Check if dice reached the goal
     checkGoal();
 
-    // update movement previews
-    setTimeout(() =>
+    // start new preview timer
+    previewTimeout = setTimeout(() =>
     {
         updateMovementPreviews();
     }, previewDelay);               // set delay before showing move preview
@@ -675,6 +680,9 @@ function resetDice() // Reset puzzle for re-attempt
     dice.north = getSides(dice.south);
     dice.east = getSides(dice.west);
 
+    // Cancel any queued preview
+    clearTimeout(previewTimeout);
+
     // Remove current movement previews on reset
     diceGrid.querySelectorAll(".movementPreview").forEach(preview =>
     {
@@ -685,11 +693,11 @@ function resetDice() // Reset puzzle for re-attempt
     updateDicePosition();
     updateDiceImage();
 
-    // set intial move preview delay
+    // set intial move preview delay on reset
     setTimeout(() =>
     {
         updateMovementPreviews();
-    }, (previewDelay));               // set delay before showing move preview
+    }, (previewDelay * 2));               // set delay before showing move preview
 
 
     // remove panel

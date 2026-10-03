@@ -150,6 +150,10 @@ function createGrid()
 
             tile.classList.add("tile");
 
+            // Store the tile positions
+            tile.dataset.row = row;
+            tile.dataset.column = column;
+
             // check if the tile is visible or not
             if (grid[row][column] === 1)
             {
@@ -175,15 +179,22 @@ function createGrid()
         }
     }
 }
+
+
 // --------------------------------------------------------------------------------//
 
 // --------------------------------------------------------------------------------//
+
 selectPuzzle();
 createGrid();
+
+// --------------------------------------------------------------------------------//
+
 // --------------------------------------------------------------------------------//
 
 
-// Set the other dice faces from orientation
+// -----------------------------------------------------------------------//
+//              Set the other dice faces from orientation                 //
 function getSides(number)
 {
     const opposites =
@@ -229,6 +240,83 @@ function updateDicePosition()
 
 updateDicePosition();
 
+// -----------------------------------------------------------------------//
+//                      Guide - Add movement preview                      //
+// update the preview
+function updateMovementPreviews()
+{
+    // stop from showing previews after game end
+    if (gameEnd)
+    {
+        return;
+    }
+
+    // Remove existing previews
+    diceGrid.querySelectorAll(".movementPreview").forEach(preview =>
+    {
+        preview.remove();
+    });
+
+    // Check all four directions
+    addMovementPreview("forward", -1, 0);
+    addMovementPreview("backward", 1, 0);
+    addMovementPreview("right", 0, 1);
+    addMovementPreview("left", 0, -1);
+}
+// create the preview
+function addMovementPreview(direction, rowChange, columnChange)
+{
+    const newRow = diceLocation.row + rowChange;            // Update position
+    const newColumn = diceLocation.column + columnChange;   // Update position
+
+    // Check for valid move before showing preview
+    if (!canMoveTo(newRow, newColumn))
+    {
+        return;
+    }
+
+    // Find the tile at valid locations
+    const tile = diceGrid.querySelector(
+        `.tile[data-row="${newRow}"][data-column="${newColumn}"]`
+    );
+
+    if (!tile)
+    {
+        return;
+    }
+
+    // Create a copy of the current dice orientation
+    const previewDice = {...dice};
+
+    // Simulate the roll for then calculating the image
+    switch (direction)
+    {
+        case "forward":
+            previewDice.top = dice.south;
+            break;
+        case "backward":
+            previewDice.top = dice.north;
+            break;
+        case "right":
+            previewDice.top = dice.west;
+            break;
+        case "left":
+            previewDice.top = dice.east;
+            break;
+    }
+
+    // Create preview image from the calculated valid moves
+    const preview = document.createElement("img");
+
+    preview.classList.add("movementPreview");
+
+    preview.src = `Assets/Dice_side${previewDice.top}.png`;
+
+    tile.appendChild(preview);
+}
+// -----------------------------------------------------------------------//
+// -----------------------------------------------------------------------//
+//                          Dice image update                             //
 function updateDiceImage()
 {
     const diceImage = document.getElementById("diceImage");
@@ -261,19 +349,26 @@ window.addEventListener("resize", function()
 });
 
 // -------------------------------------------------------------------------------- //
-
-// Start game
+// -------------------------------------------------------------------------------- //
+//                                    Start game                                    //
 let score = 0;
 let rollCount = 0;
 let gameEnd = false;
 
 let canMove = true;
 const Delay = 350; //milliseconds    - set for normal colour reset
+const previewDelay = 1000; //milliseconds    - set for delay before showing previews
 const moveDelay = 100; // milliseconds      - set for dice roll movement input delay
 const failDelay = 1500; // milliseconds      - for the CSS fail colour flash
 const winDelay = 3000;  // milliseconds     - for winning colour flash
 
 updateDiceImage();
+
+// set intial move preview delay
+setTimeout(() =>
+{
+    updateMovementPreviews();
+}, (previewDelay * 2));               // set delay before showing move preview
 
 function canMoveTo(row, column)
 {
@@ -293,7 +388,8 @@ function canMoveTo(row, column)
 }
 // --------------------------------------------------------------------------------//
 
-// handle dice location updates
+// -----------------------------------------------------------------------//
+//                    handle dice location updates (moving)               //
 function move(direction)
 {
     // stop game if ended
@@ -307,6 +403,12 @@ function move(direction)
     {
         return;
     }
+
+    // Remove current movement previews so can reapply after movement
+    diceGrid.querySelectorAll(".movementPreview").forEach(preview =>
+    {
+        preview.remove();
+    });
 
     // start dice at correct start location
     let newRow = diceLocation.row;
@@ -372,15 +474,21 @@ function move(direction)
     // Check if dice reached the goal
     checkGoal();
 
+    // update movement previews
+    setTimeout(() =>
+    {
+        updateMovementPreviews();
+    }, previewDelay);               // set delay before showing move preview
+
     // Allow for next move
     setTimeout(() =>
     {
         canMove = true;
     }, moveDelay);
 }
-// --------------------------------------------------------------------------------//
-
-// check if goal reached
+// -------------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------------- //
+//                          Win check - check if goal reached                       //
 function checkGoal()
 {
     if
@@ -490,7 +598,7 @@ gameEndButton.addEventListener("click", function()
 
 // --------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------//
-
+//                                     Dice movement directions NESW               //
 // creating NESW roll functions for changing top number
     // and adding the new number to the score
 function rollForward() // Roll north / up
@@ -546,8 +654,8 @@ function rollLeft() // Roll west / left
     document.getElementById("currentscore").textContent = score;
 }
 // --------------------------------------------------------------------------------//
-
-// Puzzle reset
+// -----------------------------------------------------------------------//
+//                              Puzzle reset                              //
 function resetDice() // Reset puzzle for re-attempt
 {
     score = 0;
@@ -567,16 +675,29 @@ function resetDice() // Reset puzzle for re-attempt
     dice.north = getSides(dice.south);
     dice.east = getSides(dice.west);
 
+    // Remove current movement previews on reset
+    diceGrid.querySelectorAll(".movementPreview").forEach(preview =>
+    {
+        preview.remove();
+    });
+
     // reset dice visual
     updateDicePosition();
     updateDiceImage();
 
+    // set intial move preview delay
+    setTimeout(() =>
+    {
+        updateMovementPreviews();
+    }, (previewDelay));               // set delay before showing move preview
+
+
     // remove panel
     document.getElementById("gameEndPanel").style.display = "none";
 }
-// --------------------------------------------------------------------------------//
-
-// Change the grid colour on puzzle failure / win and close
+// -------------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------------- //
+//          Change the grid colour on puzzle failure / win and close                //
 function flashFail()
 {
     const visibleTiles = diceGrid.querySelectorAll(".tile.visible");
@@ -650,8 +771,7 @@ function flashNormal()
 }
 
 // --------------------------------------------------------------------------------//
-
-// Key controls for the game
+//                          Key controls for the game                              //
 document.addEventListener("keydown", function(event)
 {
     // stop arrow keys from scrolling the page

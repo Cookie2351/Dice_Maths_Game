@@ -19,18 +19,37 @@
     </header>
 
     <main>
-            <br><br><br>
+            <br>
             <div id="gameArea">
 
                 <div id="gameInfo">
-                    <div id="gameTargetStats">
-                        <h2>Current Score: <span id="currentscore">0</span></h2>
-                        <h3>Target Score: <span id="targetscore">0</span></h3>
-                    </div>
 
+                    <div id="gameTargetStats">
+                        <div class="statRow">
+                            <span>Current Score</span>
+                            <span>:</span>
+                            <span id="currentscore">0</span>
+                        </div>
+
+                        <div class="statRow">
+                            <span>Target Score</span>
+                            <span>:</span>
+                            <span id="targetscore">0</span>
+                        </div>
+                    </div>
+                    <br>
                     <div id="gameStats">
-                        <h4>Current Moves: <span id="rollcount">0</span></h4>
-                        <h4>Hint: <span id="targetmoves">0</span> moves</h4>
+                        <div class="statRow">
+                            <span>Current Moves</span>
+                            <span>:</span>
+                            <span id="rollcount">0</span>
+                        </div>
+
+                        <div class="statRow">
+                            <span>Moves Hint</span>
+                            <span>:</span>
+                            <span id="targetmoves">0</span>
+                        </div>
                     </div>
 
                     <div id="rollGuide">
@@ -45,6 +64,7 @@
                         <img id="arrowRight" src="Assets/Arrow_RIGHT.png" alt="Right">
                         <img id="arrowDown" src="Assets/Arrow_DOWN.png" alt="Down">
                     </div>
+                    
                 </div>
 
                 <div id="diceGrid">

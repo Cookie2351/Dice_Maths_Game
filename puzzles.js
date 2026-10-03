@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "01/10/2026",
+        date: "03/10/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -41,7 +41,7 @@ const puzzles =
     },
 
     {
-        date: "02/10/2026",
+        date: "04/10/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0

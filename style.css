@@ -40,28 +40,73 @@ footer
     text-align: right;
     padding: 20px;    
 }
+
+/* ------------------------------------------------------------------------------- */
+
 /* ------------------------------------------------------------------------------- */
 /*                                Game area                                        */
-/*      game text       */
+/*      Game       */
 #gameInfo
 {
-    width: 100%;
+    display: grid;
 
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+
+    column-gap: 60px;
+    row-gap: 20px;
+    align-items: start;
     justify-content: center;
-    gap: 10px;
 }
+/* Score + Target Score */
 #gameStats
 {
-    width: clamp(220px, 20vw, 400px);
+    grid-column: 1;
+    grid-row: 1;
+
+    width: auto;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    
+    transform: translateX(5px);
+}
+/* GRID */
+#diceGrid
+{
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    justify-self: center;
+    align-self: start;
+
+    transform: translate(60px, -280px);    /* X and then Y */
+}
+
+/* Moves + Hint */
+#moveStats
+{
+    grid-column: 2;
+    grid-row: 1;
 
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    justify-content: center;
+    gap: 20px;
+
+    transform: translate(-40px, 100px);    /* X and then Y */
 }
+/* Roll Guide */
+#rollGuide
+{
+    grid-column: 2;
+    grid-row: 2;
+
+    margin-top: 20px;
+}
+
 .statRow
 {
     display: grid;
@@ -69,6 +114,7 @@ footer
     column-gap: 2px;
     align-items: center;
 }
+/*      Text alignment      */
 .statRow h3
 {
     margin: 0;
@@ -99,11 +145,11 @@ footer
     position: relative;
 }
 /* ------------------------------------------------------------------------------- */
-/*                                Roll Guide                                       */
+/*                                Roll Guide Design                                */
 #rollGuide
 {
-    transform: translateX(-5px) scale(0.6);
-    transform-origin: center;
+    transform: translateY(100px) scale(0.8);
+    transform-origin: top center;
     --dice-size: 60px;
     --gap: 30px;
 
@@ -194,10 +240,14 @@ footer
     transform: translateX(-2px);
 }
 
+/* -------------------------------------------------------------------------- */
+
+
+
 /* ---------------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------------- */
 /*                                      Mobile Layout                                             */
-@media (max-width: 600px)
+@media (max-width: 700px)
 {
     #gameInfo
     {
@@ -206,7 +256,7 @@ footer
         align-items: center;
         gap: 0px;
     }
-    /* CURRENT SCORE + TARGET SCORE */
+    /* Score + Target Score */
     #gameStats
     {
         width: auto;
@@ -222,8 +272,11 @@ footer
     {
         margin-top: 20px;
         margin-bottom: 20px;
+        align-self: center;
+
+        transform: none;
     }
-    /* CURRENT MOVES + MOVES HINT */
+    /* Moves + Hint */
     #moveStats
     {
         display: flex;
@@ -237,7 +290,7 @@ footer
     {
         margin-top: -20px;
 
-        transform: translateX(117px) scale(1);
+        transform: translateX(120px) scale(1);
         transform-origin: center;
     }
     /* STAT ROW */
@@ -253,8 +306,13 @@ footer
 /* ------------------------------------------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------ */
 
+
+
+
+
+
 /* ------------------------------------------------------------------------- */
-/*                                Game Grid                                  */
+/*                                Game Grid Layout                           */
 .tile
 {
     width: 100%;
@@ -337,8 +395,11 @@ footer
 
     transform: translate(-50%, -50%);
 }
-/* ------------------------------------------------------------------------- */
-/*                                Game Panels                                */
+
+/* ---------------------------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------------------- */
+/*                                          Game Panels                                     */
 #gameEndPanel
 {
     position: fixed;

@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "04/10/2026",
+        date: "05/10/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -41,7 +41,7 @@ const puzzles =
     },
 
     {
-        date: "05/10/2026",
+        date: "06/10/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -81,20 +81,96 @@ const puzzles =
     },
 
     {
-        date: "00/00/0000",
+        date: "06/10/2026",
         devName: "SetPuzzle3", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
         [
-            [0, 0, 0, 0, 0],   // row 0
+            [1, 1, 1, 0, 0],   // row 0
+            [1, 1, 1, 0, 0],   // row 1
+            [0, 1, 1, 1, 0],   // row 2
+            [0, 0, 1, 1, 1],   // row 3
+            [0, 0, 1, 0, 0],   // row 4
+        ],
+
+        start: { row: 3, column: 4 },   // square has to be visible
+        end:   { row: 1, column: 0 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 3,
+            south: 1,
+            west: 5
+        },
+
+        targetScore: 30,    // set target score for game win
+
+        path:               // Get targetMoves from path    // index starts at 0
+        [
+            "left",       // move 1 - move off start square - index 0
+            "up",          // move 2
+            "left",          // move 3
+            "up",          // move 4
+            "up",          // move 5       - index 4
+            "left",        // move 6
+            "down",          // move 7
+            "left",          // move 8 - move to end square
+        ],
+    },
+
+    {
+        date: "07/10/2026",
+        devName: "SetPuzzle4", // Set a dev command to select this puzzle
+
+        grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
+        [
+            [0, 0, 1, 0, 0],   // row 0
+            [0, 1, 1, 0, 0],   // row 1
+            [0, 1, 1, 1, 1],   // row 2
+            [0, 0, 1, 1, 0],   // row 3
+            [0, 0, 1, 0, 0],   // row 4
+        ],
+
+        start: { row: 1, column: 1 },   // square has to be visible
+        end:   { row: 2, column: 4 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 3,
+            south: 2,
+            west: 1
+        },
+
+        targetScore: 24,    // set target score for game win
+
+        path:               // Get targetMoves from path    // index starts at 0
+        [
+            "down",       // move 1 - move off start square - index 0
+            "right",          // move 2
+            "right",          // move 3
+            "down",          // move 4
+            "left",          // move 5
+            "up",          // move 6       - index 4
+            "right",        // move 7
+            "right",          // move 8 - move to end square
+        ],
+    },
+
+    {
+        date: "08/10/2026",
+        devName: "Blank", // Set a dev command to select this puzzle
+
+        grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
+        [
+            [0, 0, 1, 0, 0],   // row 0
             [0, 0, 0, 0, 0],   // row 1
             [0, 0, 0, 0, 0],   // row 2
             [0, 0, 0, 0, 0],   // row 3
-            [0, 0, 0, 0, 0],   // row 4
+            [0, 0, 1, 0, 0],   // row 4
         ],
 
-        start: { row: 4, column: 0 },   // square has to be visible
-        end:   { row: 0, column: 4 },   // square has to be visible
+        start: { row: 4, column: 2 },   // square has to be visible
+        end:   { row: 0, column: 2 },   // square has to be visible
 
         dice:       // set three sides so dice orientation and values can all be set
         {
@@ -107,7 +183,7 @@ const puzzles =
 
         path:               // Get targetMoves from path    // index starts at 0
         [
-            "",       // move 1 - move off start square - index 0
+            "up",       // move 1 - move off start square - index 0
             "",          // move 2
             "",          // move 3
             "",          // move 4
@@ -121,7 +197,6 @@ const puzzles =
             "",        // move 12 - move to end square
         ],
     },
-
 // -------------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------------- //
 //                                  Blank Puzzle                                    //
@@ -133,15 +208,15 @@ const puzzles =
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
         [
-            [0, 0, 0, 0, 0],   // row 0
+            [0, 0, 1, 0, 0],   // row 0
             [0, 0, 0, 0, 0],   // row 1
             [0, 0, 0, 0, 0],   // row 2
             [0, 0, 0, 0, 0],   // row 3
-            [0, 0, 0, 0, 0],   // row 4
+            [0, 0, 1, 0, 0],   // row 4
         ],
 
-        start: { row: 4, column: 0 },   // square has to be visible
-        end:   { row: 0, column: 4 },   // square has to be visible
+        start: { row: 4, column: 2 },   // square has to be visible
+        end:   { row: 0, column: 2 },   // square has to be visible
 
         dice:       // set three sides so dice orientation and values can all be set
         {
@@ -154,7 +229,7 @@ const puzzles =
 
         path:               // Get targetMoves from path    // index starts at 0
         [
-            "",       // move 1 - move off start square - index 0
+            "up",       // move 1 - move off start square - index 0
             "",          // move 2
             "",          // move 3
             "",          // move 4

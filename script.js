@@ -131,7 +131,7 @@ function forcePuzzleQ()
 
 function forcePuzzle0()
 {
-    forcePuzzle("BlankPuzzle0")
+    forcePuzzle("Blank")
 }
 // --------------------------------------------------------------------------------//
 //                                  END OF DEV TOOLS                               //

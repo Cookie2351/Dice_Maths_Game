@@ -358,6 +358,18 @@ footer
 {
     background-color: #0dc529dd;
 }
+.tile.minus
+{
+    background-color: #C19A41;
+}
+.tile.multiply
+{
+    background-color: #5B84C2;
+}
+.tile.square
+{
+    background-color: #C25BB6;
+}
 /* ------------------------------------------------------------------------- */
 /*                               Dice for the game                           */
 #dice

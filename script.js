@@ -34,7 +34,8 @@ let targetMoves;
 
 let previewTimeout;
 
-const diceGrid = document.getElementById("diceGrid");
+// Set start difficulty
+let difficulty = "normal";
 
 // Set the days puzzle and retrieve values
 function loadPuzzle(puzzle)
@@ -48,9 +49,7 @@ function loadPuzzle(puzzle)
     // set dice
     dice =
     {
-        top: currentPuzzle.dice.top,
-        south: currentPuzzle.dice.south,
-        west: currentPuzzle.dice.west
+        top: currentPuzzle.dice.top, south: currentPuzzle.dice.south, west: currentPuzzle.dice.west
     };
 
     // retrieve dice orientation
@@ -59,8 +58,11 @@ function loadPuzzle(puzzle)
         top: dice.top, south: dice.south, west: dice.west
     };
 
-    targetScore = currentPuzzle.targetScore;
-    targetMoves = currentPuzzle.path.length;
+    // Set aprropriate difficulty settings
+    const difficultyData = currentPuzzle.difficulties[difficulty];
+
+    targetScore = difficultyData.targetScore;
+    targetMoves = difficultyData.path.length;
     
     document.getElementById("targetscore").textContent = targetScore;
     document.getElementById("targetmoves").textContent = targetMoves;
@@ -149,6 +151,7 @@ function createGrid()
         for (let column = 0; column < 5; column++) // for grid 5x5
         {
             const tile = document.createElement("div");
+            const difficultyData = currentPuzzle.difficulties[difficulty];
 
             tile.classList.add("tile");
 
@@ -178,6 +181,21 @@ function createGrid()
             }
 
             diceGrid.appendChild(tile);
+
+            // Check for special difficulty tiles
+            if (difficultyData.minus &&
+                row === difficultyData.minus.row && column === difficultyData.minus.column)
+            {
+                tile.classList.add("minus");
+            }
+                if (difficultyData.multiply)
+            {
+                
+            }
+                if (difficultyData.square)
+            {
+                
+            }
         }
     }
 }
@@ -705,6 +723,22 @@ function resetDice() // Reset puzzle for re-attempt
     document.getElementById("gameEndPanel").style.display = "none";
 }
 // -------------------------------------------------------------------------------- //
+
+// -------------------------------------------------------------------------------- //
+//                              Adding difficulty multipliers                       //
+// -------------------------------------------------------------------------------- //
+function setDifficulty(newDifficulty)
+{
+    difficulty = newDifficulty;
+
+    loadPuzzle(currentPuzzle);
+}
+
+
+
+// -------------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------------- //
+
 // -------------------------------------------------------------------------------- //
 //          Change the grid colour on puzzle failure / win and close                //
 function flashFail()

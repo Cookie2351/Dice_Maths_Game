@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "05/10/2026",
+        date: "08/10/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -23,25 +23,82 @@ const puzzles =
             west: 6
         },
 
-        targetScore: 37,    // set target score for game win
+        difficulties:
+        {
+            normal:
+            {
+                minus: { row: 4, column: 4},
+                multiply: null,
+                square: null,
 
-        path:               // Get targetMoves from path    // index starts at 0
-        [
-            "right",       // move 1 - move off start square - index 0
-            "right",          // move 2
-            "right",          // move 3
-            "up",          // move 4
-            "right",          // move 5       - index 4
-            "up",        // move 6
-            "up",          // move 7
-            "left",          // move 8
-            "up",           // move 9
-            "right",        // move 10 - move to end square
-        ],
+                targetScore: 37,    // set target score for game win
+                
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "right",          // move 2
+                    "right",          // move 3
+                    "up",          // move 4
+                    "right",          // move 5       - index 4
+                    "up",        // move 6
+                    "up",          // move 7
+                    "left",          // move 8
+                    "up",           // move 9
+                    "right",        // move 10 - move to end square
+                ]
+            },
+            medium:
+            {
+                minus: { row: 4, column: 4},
+                multiply: { row: 1, column: 4},
+                square: null,
+
+                targetScore: 100,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "",       // move 1 - move off start square - index 0
+                    "",          // move 2
+                    "",          // move 3
+                    "",          // move 4
+                    "",          // move 5       - index 4
+                    "",        // move 6
+                    "",          // move 7
+                    "",          // move 8
+                    "",           // move 9
+                    "",        // move 10
+                    "",        // move 11
+                    "",        // move 12 - move to end square
+                ]
+            },
+            hard:
+            {
+                minus: { row: 4, column: 4},
+                multiply: { row: 1, column: 4},
+                square: { row: 0, column: 2},
+
+                targetScore: 99,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "",       // move 1 - move off start square - index 0
+                    "",          // move 2
+                    "",          // move 3
+                    "",          // move 4
+                    "",          // move 5       - index 4
+                    "",        // move 6
+                    "",          // move 7
+                    "",          // move 8
+                    "",           // move 9
+                    "",        // move 10
+                    "",        // move 11 - move to end square
+                ]
+            }
+        }
     },
 
     {
-        date: "06/10/2026",
+        date: "09/10/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -63,25 +120,35 @@ const puzzles =
             west: 6
         },
 
-        targetScore: 36,    // set target score for game win
+        difficulties:
+        {
+            normal:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
 
-        path:               // Get targetMoves from path    // index starts at 0
-        [
-            "left",       // move 1 - move off start square - index 0
-            "up",          // move 2
-            "up",          // move 3
-            "left",          // move 4
-            "up",          // move 5       - index 4
-            "up",        // move 6
-            "right",          // move 7
-            "right",          // move 8
-            "down",           // move 9
-            "down",          // move 10 - move to end square
-        ],
+                targetScore: 36,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "left",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "up",          // move 3
+                    "left",          // move 4
+                    "up",          // move 5       - index 4
+                    "up",        // move 6
+                    "right",          // move 7
+                    "right",          // move 8
+                    "down",           // move 9
+                    "down",          // move 10 - move to end square
+                ]
+            }
+        }
     },
 
     {
-        date: "06/10/2026",
+        date: "10/10/2026",
         devName: "SetPuzzle3", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -103,23 +170,33 @@ const puzzles =
             west: 5
         },
 
-        targetScore: 30,    // set target score for game win
+        difficulties:
+        {
+            normal:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
 
-        path:               // Get targetMoves from path    // index starts at 0
-        [
-            "left",       // move 1 - move off start square - index 0
-            "up",          // move 2
-            "left",          // move 3
-            "up",          // move 4
-            "up",          // move 5       - index 4
-            "left",        // move 6
-            "down",          // move 7
-            "left",          // move 8 - move to end square
-        ],
+                targetScore: 30,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "left",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "left",          // move 3
+                    "up",          // move 4
+                    "up",          // move 5       - index 4
+                    "left",        // move 6
+                    "down",          // move 7
+                    "left",          // move 8 - move to end square
+                ]
+            }
+        }
     },
 
     {
-        date: "07/10/2026",
+        date: "11/10/2026",
         devName: "SetPuzzle4", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -141,23 +218,33 @@ const puzzles =
             west: 1
         },
 
-        targetScore: 24,    // set target score for game win
+        difficulties:
+        {
+            normal:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
 
-        path:               // Get targetMoves from path    // index starts at 0
-        [
-            "down",       // move 1 - move off start square - index 0
-            "right",          // move 2
-            "right",          // move 3
-            "down",          // move 4
-            "left",          // move 5
-            "up",          // move 6       - index 4
-            "right",        // move 7
-            "right",          // move 8 - move to end square
-        ],
+                targetScore: 24,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "down",       // move 1 - move off start square - index 0
+                    "right",          // move 2
+                    "right",          // move 3
+                    "down",          // move 4
+                    "left",          // move 5
+                    "up",          // move 6       - index 4
+                    "right",        // move 7
+                    "right",          // move 8 - move to end square
+                ]
+            }
+        }
     },
 
     {
-        date: "08/10/2026",
+        date: "12/10/2026",
         devName: "Blank", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0

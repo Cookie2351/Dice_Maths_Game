@@ -593,6 +593,45 @@ footer
 {
     background-color: #C25BB6;
 }
+.tileMinusImage
+{
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    inset: 0;
+    margin: auto;
+    pointer-events: none;
+    transform: translate(0.5px, -1.2px);
+}
+.tileMultiplyImage
+{
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+    inset: 0;
+    margin: auto;
+    pointer-events: none;
+    transform: translate(-0.6px, -0.5px);
+}
+.tileSquareImage
+{
+    position: absolute;
+    width: 85%;
+    height: 85%;
+    max-width: 85%;
+    max-height: 85%;
+    object-fit: contain;
+    inset: 0;
+    margin: auto;
+    pointer-events: none;
+    transform: translate(-1.5px, -2px);
+}
 /* ------------------------------------------------------------------------- */
 /*                               Dice for the game                           */
 #dice

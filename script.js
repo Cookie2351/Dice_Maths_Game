@@ -37,6 +37,14 @@ let previewTimeout;
 // Set start difficulty
 let difficulty = "normal";
 
+// Set difficulty tile initial state
+let minus = null;
+let movingToMinus = false;
+let multiply = null;
+let movingToMultiply = false;
+let square = null;
+let movingToSquare = false;
+
 // Set the days puzzle and retrieve values
 function loadPuzzle(puzzle)
 {
@@ -60,6 +68,11 @@ function loadPuzzle(puzzle)
 
     // Set aprropriate difficulty settings
     const difficultyData = currentPuzzle.difficulties[difficulty];
+
+    // Retrieve coordinates of difficulty tiles on puzzle load
+    minus = difficultyData.minus || null;
+    multiply = difficultyData.multiply || null;
+    square = difficultyData.square || null;
 
     targetScore = difficultyData.targetScore;
     targetMoves = difficultyData.path.length;
@@ -187,14 +200,40 @@ function createGrid()
                 row === difficultyData.minus.row && column === difficultyData.minus.column)
             {
                 tile.classList.add("minus");
+                if (tile.classList.contains("minus"))
+                {
+                    const MinusImage = document.createElement("img");
+                    MinusImage.src = "Assets/Minus.png";
+                    MinusImage.classList.add("tileMinusImage");
+
+                    tile.appendChild(MinusImage);
+                }
             }
-                if (difficultyData.multiply)
+            if (difficultyData.multiply &&
+                row === difficultyData.multiply.row && column === difficultyData.multiply.column)
             {
-                
+                tile.classList.add("multiply");
+                if (tile.classList.contains("multiply"))
+                {
+                    const MultiplyImage = document.createElement("img");
+                    MultiplyImage.src = "Assets/Multiply.png";
+                    MultiplyImage.classList.add("tileMultiplyImage");
+
+                    tile.appendChild(MultiplyImage);
+                }
             }
-                if (difficultyData.square)
+            if (difficultyData.square &&
+                row === difficultyData.square.row && column === difficultyData.square.column)
             {
-                
+                tile.classList.add("square");
+                if (tile.classList.contains("square"))
+                {
+                    const SquareImage = document.createElement("img");
+                    SquareImage.src = "Assets/Square.png";
+                    SquareImage.classList.add("tileSquareImage");
+
+                    tile.appendChild(SquareImage);
+                }
             }
         }
     }
@@ -460,6 +499,24 @@ function move(direction)
         return;
     }
 
+    // after valid move check if it is minus tile before moving
+    movingToMinus =
+        minus !== null &&
+        newRow === minus.row &&
+        newColumn === minus.column;
+
+    // after valid move check if it is multiply tile before moving
+    movingToMultiply =
+        multiply !== null &&
+        newRow === multiply.row &&
+        newColumn === multiply.column;
+
+    // after valid move check if it is square tile before moving
+    movingToSquare =
+        square !== null &&
+        newRow === square.row &&
+        newColumn === square.column;
+
     // start movement cooldown
     canMove = false;
 
@@ -516,7 +573,7 @@ function checkGoal()
 {
     if
     (
-        diceLocation.row == end.row &&
+        diceLocation.row === end.row &&
         diceLocation.column === end.column
     )
     {
@@ -634,7 +691,25 @@ function rollForward() // Roll north / up
     dice.bottom = dice.north;
     dice.north = oldTop;
 
-    score += dice.top
+    if (movingToMinus)
+    {
+        console.log("minus", dice.top)
+        score -= dice.top;
+    }
+    else if (movingToMultiply)
+    {
+        console.log("up to multiply", dice.top, "x", dice.north, "=", (dice.top * dice.north))
+        score += (dice.top * dice.north) // not south because dice has already been rotated
+    }
+    else if (movingToSquare)
+    {
+        console.log("square", dice.top, "x", dice.top, "=", dice.top * dice.top)
+        score += (dice.top * dice.top);
+    }
+    else
+    {
+        score += dice.top;
+    }
 
     document.getElementById("currentscore").textContent = score;
 }
@@ -647,7 +722,25 @@ function rollBackward() // Roll south / down
     dice.bottom = dice.south;
     dice.south = oldTop;
 
-    score += dice.top
+    if (movingToMinus)
+    {
+        console.log("minus -", dice.top)
+        score -= dice.top;
+    }
+    else if (movingToMultiply)
+    {
+        console.log("down to multiply", dice.top, "x", dice.south, "=", (dice.top * dice.south))
+        score += (dice.top * dice.south) // not north because dice has already been rotated
+    }
+    else if (movingToSquare)
+    {
+        console.log("square -", dice.top, "x", dice.top, "=", dice.top * dice.top)
+        score += (dice.top * dice.top);
+    }
+    else
+    {
+        score += dice.top;
+    }
 
     document.getElementById("currentscore").textContent = score;
 }
@@ -660,7 +753,25 @@ function rollRight() // Roll east / right
     dice.bottom = dice.east;
     dice.east = oldTop;
 
-    score += dice.top
+    if (movingToMinus)
+    {
+        console.log("minus -", dice.top)
+        score -= dice.top;
+    }
+    else if (movingToMultiply)
+    {
+        console.log("right to multiply", dice.top, "x", dice.east, "=", (dice.top * dice.east))
+        score += (dice.top * dice.east) // not west because dice has already been rotated
+    }
+    else if (movingToSquare)
+    {
+        console.log("square", dice.top, "x", dice.top, "=", dice.top * dice.top)
+        score += (dice.top * dice.top);
+    }
+    else
+    {
+        score += dice.top;
+    }
 
     document.getElementById("currentscore").textContent = score;
 }
@@ -673,7 +784,25 @@ function rollLeft() // Roll west / left
     dice.bottom = dice.west
     dice.west = oldTop;
 
-    score += dice.top
+    if (movingToMinus)
+    {
+        console.log("minus -", dice.top)
+        score -= dice.top;
+    }
+    else if (movingToMultiply)
+    {
+        console.log("left to multiply", dice.top, "x", dice.west, "=", (dice.top * dice.west))
+        score += (dice.top * dice.west) // not east because dice has already been rotated
+    }
+    else if (movingToSquare)
+    {
+        console.log("square", dice.top, "x", dice.top, "=", dice.top * dice.top)
+        score += (dice.top * dice.top);
+    }
+    else
+    {
+        score += dice.top;
+    }
 
     document.getElementById("currentscore").textContent = score;
 }
@@ -727,15 +856,13 @@ function resetDice() // Reset puzzle for re-attempt
 // -------------------------------------------------------------------------------- //
 //                              Adding difficulty multipliers                       //
 // -------------------------------------------------------------------------------- //
+// Set difficulty of the day's puzzle
 function setDifficulty(newDifficulty)
 {
     difficulty = newDifficulty;
 
     loadPuzzle(currentPuzzle);
 }
-
-
-
 // -------------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------------- //
 

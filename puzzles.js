@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "09/10/2026",
+        date: "10/10/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -27,9 +27,9 @@ const puzzles =
         {
             normal:
             {
-                minus: { row: 4, column: 4},
-                multiply: null,
-                square: null,
+                minus: { row: 4, column: 4 },
+                multiply: { row: 1, column: 2 },
+                square: { row: 0, column: 3 },
 
                 targetScore: 37,    // set target score for game win
                 
@@ -49,8 +49,8 @@ const puzzles =
             },
             medium:
             {
-                minus: { row: 4, column: 4},
-                multiply: { row: 1, column: 4},
+                minus: { row: 4, column: 4 },
+                multiply: { row: 1, column: 4 },
                 square: null,
 
                 targetScore: 100,    // set target score for game win
@@ -73,9 +73,9 @@ const puzzles =
             },
             hard:
             {
-                minus: { row: 4, column: 4},
-                multiply: { row: 1, column: 4},
-                square: { row: 0, column: 2},
+                minus: { row: 4, column: 4 },
+                multiply: { row: 1, column: 4 },
+                square: { row: 0, column: 2 },
 
                 targetScore: 99,    // set target score for game win
 
@@ -98,7 +98,7 @@ const puzzles =
     },
 
     {
-        date: "10/10/2026",
+        date: "11/10/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -148,7 +148,7 @@ const puzzles =
     },
 
     {
-        date: "11/10/2026",
+        date: "12/10/2026",
         devName: "SetPuzzle3", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -196,7 +196,7 @@ const puzzles =
     },
 
     {
-        date: "12/10/2026",
+        date: "13/10/2026",
         devName: "SetPuzzle4", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -244,7 +244,7 @@ const puzzles =
     },
 
     {
-        date: "13/10/2026",
+        date: "14/10/2026",
         devName: "Blank", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0

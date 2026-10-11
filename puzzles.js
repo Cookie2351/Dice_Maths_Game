@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "10/10/2026",
+        date: "11/10/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -98,7 +98,7 @@ const puzzles =
     },
 
     {
-        date: "11/10/2026",
+        date: "12/10/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -148,7 +148,7 @@ const puzzles =
     },
 
     {
-        date: "12/10/2026",
+        date: "13/10/2026",
         devName: "SetPuzzle3", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -196,7 +196,7 @@ const puzzles =
     },
 
     {
-        date: "13/10/2026",
+        date: "14/10/2026",
         devName: "SetPuzzle4", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -244,7 +244,7 @@ const puzzles =
     },
 
     {
-        date: "14/10/2026",
+        date: "15/10/2026",
         devName: "Blank", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0

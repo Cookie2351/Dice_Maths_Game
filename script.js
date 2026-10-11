@@ -241,17 +241,11 @@ function createGrid()
 
 
 // --------------------------------------------------------------------------------//
-
 // --------------------------------------------------------------------------------//
-
 selectPuzzle();
 createGrid();
-
+startScreen()
 // --------------------------------------------------------------------------------//
-
-// --------------------------------------------------------------------------------//
-
-
 // -----------------------------------------------------------------------//
 //              Set the other dice faces from orientation                 //
 function getSides(number)
@@ -616,10 +610,35 @@ function checkGoal()
 
     }
 }
+// ----------------------------------------------------------------------------------------- //
 
-// --------------------------------------------------------------------------------//
-//                              Game Panels                                        //
-// --------------------------------------------------------------------------------//
+// --------------------------------------------------------------------------//
+// --------------------------------------------------------------------------//
+//                           Game Panels                                     //
+// --------------------------------------------------------------------------//
+//    START PANELS    //
+function startScreen()
+{
+    const gameStartPanel = document.getElementById("gameStartPanel");
+    const gameStartTitle = document.getElementById("gameStartTitle");
+    const gameStartMessage = document.getElementById("gameStartMessage");
+    const gameStartButton = document.getElementById("gameStartButton");
+
+    gameStartPanel.className = "start";
+    gameStartTitle.textContent = `Today's puzzle for:  ${todayDate}`;
+    gameStartMessage.textContent = `Roll to the target score of ${targetScore}`;
+    gameStartButton.textContent = "PLAY";
+    gameStartPanel.style.display = "flex";
+
+
+}
+
+gameStartButton.addEventListener("click", function()
+{
+    // Start the game on normal difficulty
+})
+
+// ------------------------------------------------------------------------ //
 
 // Game Success Panel
 function showSuccessPanel()
@@ -631,21 +650,15 @@ function showSuccessPanel()
     const gameEndButton = document.getElementById("gameEndButton");
 
     gameEndPanel.className = "success";
-
     gameEndTitle.textContent = "Puzzle Complete!";
-    
-
     gameEndMessage.textContent =
         "You solved today's puzzle!";
-
     gameEndStats.textContent =
         `Score: ${score} | Moves: ${rollCount}`;
-
     gameEndButton.textContent = "Play Again";
-
     gameEndPanel.style.display = "flex";
-    
 }
+
 // Game Close Panel
 function showClosePanel()
 {
@@ -677,7 +690,8 @@ gameEndButton.addEventListener("click", function()
     flashNormal();
 });
 
-// --------------------------------------------------------------------------------//
+// ----------------------------------------------------------------------------------------- //
+
 // --------------------------------------------------------------------------------//
 //                                     Dice movement directions NESW               //
 // creating NESW roll functions for changing top number
@@ -852,7 +866,6 @@ function resetDice() // Reset puzzle for re-attempt
     document.getElementById("gameEndPanel").style.display = "none";
 }
 // -------------------------------------------------------------------------------- //
-
 // -------------------------------------------------------------------------------- //
 //                              Adding difficulty multipliers                       //
 // -------------------------------------------------------------------------------- //

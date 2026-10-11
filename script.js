@@ -707,36 +707,36 @@ gameStartButton.addEventListener("click", function()
 });
 // ----------------------------------------------------------- //
 // Settings Panel
-function settingsScreen()
-{
-    const settingsPanel = document.getElementById("settingsPanel");
-    const settingsIcon = document.getElementById("settingsIcon");
-    const settingsExitButton = document.getElementById("settingsExitButton");
-}
+const settingsPanel = document.getElementById("settingsPanel");
+const settingsIcons = document.querySelectorAll(".settingsIcon");
+const settingsExitButton = document.getElementById("settingsExitButton");
 
 //Open Settings
-settingsIcon.addEventListener("click", function()
+settingsIcons.forEach(function(settingsIcon)
 {
-    if (startScreenOpen = true)     // Settings from start screen
+    settingsIcon.addEventListener("click", function()
     {
-        gameStartPanel.style.display = "none";
-        settingsPanel.style.display = "flex";
-    }
-    else if (endScreenOpen = true)      // Settings from end screen
-    {
-        gameEndPanel.style.display = "none";
-        settingsPanel.style.display = "flex";
-    }
-    else        // Settings from play screen
-    {
-        settingsPanel.style.display = "flex";
-    }
+        if (startScreenOpen)     // Settings from start screen
+        {
+            gameStartPanel.style.display = "none";
+            settingsPanel.style.display = "flex";
+        }
+        else if (endScreenOpen)      // Settings from end screen
+        {
+            gameEndPanel.style.display = "none";
+            settingsPanel.style.display = "flex";
+        }
+        else        // Settings from play screen
+        {
+            settingsPanel.style.display = "flex";
+        }
+    });
 });
 
 // Exit settings
 settingsExitButton.addEventListener("click", function ()
 {
-    if (startScreenOpen = true)     // Exit settings to start
+    if (startScreenOpen)     // Exit settings to start
     {
         settingsPanel.style.display = "none";
         gameStartPanel.style.display = "flex";

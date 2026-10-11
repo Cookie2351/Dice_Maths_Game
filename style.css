@@ -412,7 +412,7 @@ footer
 /* ---------------------------------------------------------------------------------------- */
 /*                                          Game Panels                                     */
 
-#gameStartPanel
+#gameStartPanel, #settingsPanel
 {
     position: fixed;
     inset: 0;
@@ -432,7 +432,7 @@ footer
     background-color: #9595954a;
     z-index: 1000;
 }
-#gameStartBox
+#gameStartBox, #settingsBox
 {
     background-color: white;
     padding: 40px;
@@ -447,8 +447,8 @@ footer
     justify-content: flex-start;
     gap: 20px;
 
-    height: 62%;
-    width: 80%;
+    height: 40%;
+    width: 40%;
     box-sizing: border-box;
 }
 #gameEndBox
@@ -573,6 +573,25 @@ footer
     background-color: #ad8d18;
 }
 
+#playerStreak
+{
+    position: absolute;
+    bottom: 10px;
+}
+
+#settingsIcon
+{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+
+    cursor: pointer;
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -582,25 +601,30 @@ footer
 /*                                      Mobile Layout                                             */
 @media (max-height: 1080px)
 {
-    #gameStartBox
+    #gameStartBox, #settingsBox
     {
-        width: 67.5%;
-        height: 67.5%;
-        transform: translateY(0px);
+        height: 45%;
+        width: 45%;
+        transform: translateY(-50px);
     }
     #gameStartTitle
     {
-        transform: translateY(120px) scale(0.8);
+        transform: translateY(-10px);
     }
     #gameStartMessage
     {
-        transform: translateY(120px);
+        transform: translateY(-10px);
     }
     #gameStartButton
     {
-        transform: translateY(140px);
+        transform: translateY(-40px);
+    }
+    .difficultyChoice
+    {
+        transform: translateY(-150px);
     }
 }
+/* ------------------------------------------------------- */
 @media (max-width: 700px)
 {
     body
@@ -728,7 +752,7 @@ footer
     }
 
 
-    #gameStartPanel
+    #gameStartPanel, #settingsPanel
     {
         position: fixed;
         inset: 0;
@@ -738,25 +762,29 @@ footer
         background-color: #9595954a;
         z-index: 1000;
     }
-    #gameStartBox
+    #gameStartBox, #settingsBox
     {
-        width: 90%;
-        height: 60%;
+        height: 40%;
+        width: 70%;
         transform: translateY(25px);
     }
     #gameStartTitle
     {
-        transform: translateY(120px) scale(0.8);
+        width: 100%;
+        transform: translateY(-20px) scale(0.8);
     }
     #gameStartMessage
     {
-        transform: translateY(120px);
+        transform: translateY(-30px);
     }
     #gameStartButton
     {
-        transform: translateY(140px);
+        transform: translateY(-80px);
     }
-
+    .difficultyChoice
+    {
+        transform: translateY(-180px) scale(0.75);
+    }
 }
 
 /*                           Ultra thin Layout                                */
@@ -887,7 +915,7 @@ footer
     }
 
 
-    #gameStartPanel
+    #gameStartPanel, #settingsPanel
     {
         position: fixed;
         inset: 0;
@@ -897,15 +925,33 @@ footer
         background-color: #9595954a;
         z-index: 1000;
     }
-    #gameStartBox
+    #gameStartBox, #settingsBox
     {
-        height: 62%;
+        height: 40%;
+        width: 70%;
         transform: translateY(35px);
     }
-    #gameStartTitle, #gameStartMessage, #gameStartButton
+    #gameStartTitle
     {
-        transform: translateY(100px) scale(0.7);
-        transform-origin: center;
+        transform: translateY(-20px) scale(0.8);
+    }
+    #gameStartMessage
+    {
+        transform: translateY(-40px) scale(0.9);
+    }
+    #gameStartButton
+    {
+        transform: translateY(-100px) scale(0.8);
+    }
+    .difficultyChoice
+    {
+        transform: translateY(-200px) scale(0.65);
+    }
+    #playerStreak
+    {
+        transform: scale(0.9);
+        position: absolute;
+        bottom: -10px;
     }
 }
 /* ------------------------------------------------------------------------------------------ */

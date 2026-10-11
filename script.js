@@ -34,8 +34,15 @@ let targetMoves;
 
 let previewTimeout;
 
+// set states for panels for entering and exiting settings menu
+startScreenOpen = false;
+endScreenOpen = false;
+
 // Set difficulty
 let difficulty = "normal";
+
+// Set forced puzzle save for replay
+let replayPuzzle = null;
 
 // Set difficulty tile initial state
 let minus = null;
@@ -64,7 +71,7 @@ function loadPuzzle(puzzle)
     dice.bottom = getSides(dice.top);
     dice.north = getSides(dice.south);
     dice.east = getSides(dice.west);
-    
+
     // retrieve dice orientation
     diceStart =
     {
@@ -101,10 +108,40 @@ function forcePuzzle(devName)
 {
     const puzzle = puzzles.find(puzzle => puzzle.devName === devName);
 
-    loadPuzzle(puzzle);
+    // Check the puzzle exists
+    if (!puzzle)
+    {
+        console.log("Could not find puzzle:", devName);
+        return;
+    }
 
+    // Check the selected difficulty exists for this puzzle
+    if (!puzzle.difficulties[difficulty])
+    {
+        console.warn(
+            `Difficulty "${difficulty}" unavailable for ${devName}. Using normal.`
+        );
+
+        difficulty = "normal";
+
+        // Update the radio button selection
+        document.querySelector(
+            'input[name="difficulty"][value="normal"]'
+        ).checked = true;
+    }
+
+    replayPuzzle = puzzle; // remember forced puzzle for play again
+
+    // Load and display the forced puzzle
+    loadPuzzle(puzzle);
     createGrid();
     resetDice();
+
+    // Update the start screen message
+    document.getElementById("gameStartMessage").textContent =
+        `Roll to reach the target score of ${targetScore}`;
+    
+    startScreen();
 }
 function forcePuzzle1()
 {
@@ -146,7 +183,7 @@ function forcePuzzle9()
 // ----------------------------------- //
 function forcePuzzleQ()
 {
-    forcePuzzle("CurrentPuzzle");
+    forcePuzzle("WIPPuzzle");
 }
 
 function forcePuzzle0()
@@ -591,23 +628,23 @@ function checkGoal()
     {
         if (score === targetScore)
         {
-            if (rollCount === targetMoves)
-            {
-                gameEnd = true;
-                console.log("Success! Score reached:", score);
-                console.log("Rolls:", rollCount);
+            // if (rollCount === targetMoves)
+            // {
+            gameEnd = true;
+            console.log("Success! Score reached:", score);
+            console.log("Rolls:", rollCount);
 
-                flashWin();
-                showSuccessPanel();
-            }
-            else
-            {
-                console.log("Score reach but wrong moves");
-                console.log("Rolls:", rollCount, "Target:", targetMoves);
+            flashWin();
+            showSuccessPanel();
+            // }
+            // else
+            // {
+            //     console.log("Score reach but wrong moves");
+            //     console.log("Rolls:", rollCount, "Target:", targetMoves);
 
-                flashClose();
-                showClosePanel()
-            }
+            //     flashClose();
+            //     showClosePanel()
+            // }
         }
         else
         {
@@ -647,6 +684,9 @@ function startScreen()
     gameStartMessage.textContent = `Roll to reach the target score of ${targetScore}`;
     gameStartButton.textContent = "PLAY";
     gameStartPanel.style.display = "flex";
+    
+    startScreenOpen = true;
+    console.log("start set true");
 }
 
 gameStartButton.addEventListener("click", function()
@@ -662,10 +702,61 @@ gameStartButton.addEventListener("click", function()
 
     // Hide the start panel
     document.getElementById("gameStartPanel").style.display = "none";
+    startScreenOpen = false;
+    console.log("start set false")
+});
+// ----------------------------------------------------------- //
+// Settings Panel
+function settingsScreen()
+{
+    const settingsPanel = document.getElementById("settingsPanel");
+    const settingsIcon = document.getElementById("settingsIcon");
+    const settingsExitButton = document.getElementById("settingsExitButton");
+}
+
+//Open Settings
+settingsIcon.addEventListener("click", function()
+{
+    if (startScreenOpen = true)     // Settings from start screen
+    {
+        gameStartPanel.style.display = "none";
+        settingsPanel.style.display = "flex";
+    }
+    else if (endScreenOpen = true)      // Settings from end screen
+    {
+        gameEndPanel.style.display = "none";
+        settingsPanel.style.display = "flex";
+    }
+    else        // Settings from play screen
+    {
+        settingsPanel.style.display = "flex";
+    }
 });
 
-// ------------------------------------------------------------------------ //
+// Exit settings
+settingsExitButton.addEventListener("click", function ()
+{
+    if (startScreenOpen = true)     // Exit settings to start
+    {
+        settingsPanel.style.display = "none";
+        gameStartPanel.style.display = "flex";
+        startScreenOpen = false;
+        console.log("start set false from exit");
+    }
+    else if (endScreenOpen)     // Exit settings to end
+    {
+        settingsPanel.style.display = "none";
+        gameEndPanel.style.display = "flex";
+        endScreenOpen = false;
+        console.log("end set false from settings exit")
+    }
+    else        // Exit settings to play screen
+    {
+        settingsPanel.style.display = "none";
+    }
+});
 
+// ----------------------------------------------------------- //
 // Game Success Panel
 function showSuccessPanel()
 {
@@ -683,6 +774,9 @@ function showSuccessPanel()
         `Score: ${score} | Moves: ${rollCount}`;
     gameEndButton.textContent = "Play Again";
     gameEndPanel.style.display = "flex";
+
+    endScreenOpen = true;
+    console.log("end set true");
 }
 
 // Game Close Panel
@@ -711,9 +805,22 @@ function showClosePanel()
 
 gameEndButton.addEventListener("click", function()
 {
-    // Reset the game
+    if (replayPuzzle)
+    {
+        currentPuzzle = replayPuzzle;
+    }
+
+    // Reload the currently active puzzle and difficulty
+    loadPuzzle(currentPuzzle);
+    // Rebuild the grid for the selected difficulty
+    createGrid();
+    // Reset score, moves, dice position and orientation
     resetDice();
+    // Restore the normal tile colours
     flashNormal();
+
+    endScreenOpen = false;
+    console.log("end set false");
 });
 
 // ----------------------------------------------------------------------------------------- //

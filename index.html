@@ -92,6 +92,7 @@
     </main>                                 <!-----------------  CLOSE MAIN --------------------->
 
         <!-- Game Panels -->
+         <!-- game start panel-->
         <div id="gameStartPanel">
             <div id="gameStartBox">
 
@@ -115,10 +116,32 @@
                 <button id="gameStartButton" onclick="resetDice()">
                     PLAY
                 </button>
+                
+                <p id="playerStreak">
+                    Your current streak is X!
+                </p>
 
+                <div id="Settings">
+                    <img id="settingsIcon" src="Assets/Cog_Icon.png" alt="Cog">
+                </div>
             </div>
+
         </div>  <!--close game start panel-->
 
+        <!-- settings panel -->
+        <div id="settingsPanel">
+            <div id="settingsBox">
+                
+                <h2 id="gameSettings">Settings</h2>
+
+                <!-- ADD SETTINGS OPTIONS-->
+
+                <button id="settingsExitButton">Exit</button>
+            </div>
+
+        </div> <!-- close settings panel -->
+
+        <!-- game end panel-->
         <div id="gameEndPanel">
             <div id="gameEndBox">
 

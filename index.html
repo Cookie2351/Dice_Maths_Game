@@ -98,8 +98,19 @@
                 <h2 id="gameStartTitle">Today's Puzzle</h2>
                 
                 <p id="gameStartMessage">
-                    Roll to target score:
+                    Roll to target score
                 </p>
+
+                <div class="difficultyChoice">
+                    <input type="radio" id="normal" name="difficulty" value="normal" checked>
+                    <label for="normal">Normal</label>
+
+                    <input type="radio" id="medium" name="difficulty" value="medium">
+                    <label for="medium">Medium</label>
+
+                    <input type="radio" id="hard" name="difficulty" value="hard">
+                    <label for="hard">Hard</label>
+                </div>
 
                 <button id="gameStartButton" onclick="resetDice()">
                     PLAY
@@ -119,7 +130,7 @@
 
                 <p id="gameEndStats"></p>
 
-                <button id="gameEndButton" onclick="resetDice()">
+                <button id="gameEndButton" onclick="selectPuzzle()">
                     Play Again
                 </button>
 

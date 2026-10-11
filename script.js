@@ -34,7 +34,7 @@ let targetMoves;
 
 let previewTimeout;
 
-// Set start difficulty
+// Set difficulty
 let difficulty = "normal";
 
 // Set difficulty tile initial state
@@ -60,6 +60,11 @@ function loadPuzzle(puzzle)
         top: currentPuzzle.dice.top, south: currentPuzzle.dice.south, west: currentPuzzle.dice.west
     };
 
+    // Recalculate the other three sides
+    dice.bottom = getSides(dice.top);
+    dice.north = getSides(dice.south);
+    dice.east = getSides(dice.west);
+    
     // retrieve dice orientation
     diceStart =
     {
@@ -245,6 +250,19 @@ function createGrid()
 selectPuzzle();
 createGrid();
 startScreen()
+
+document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        // 1. Temporarily update the difficulty variable to the one clicked
+        difficulty = this.value;
+
+        // 2. Re-run loadPuzzle to fetch the correct targetScore from your data matrix
+        loadPuzzle(currentPuzzle);
+
+        // 3. Update the start panel message text dynamically on-screen
+        document.getElementById("gameStartMessage").textContent = `Roll to reach the target score of ${targetScore}`;
+    });
+});
 // --------------------------------------------------------------------------------//
 // -----------------------------------------------------------------------//
 //              Set the other dice faces from orientation                 //
@@ -625,18 +643,26 @@ function startScreen()
     const gameStartButton = document.getElementById("gameStartButton");
 
     gameStartPanel.className = "start";
-    gameStartTitle.textContent = `Today's puzzle for:  ${todayDate}`;
-    gameStartMessage.textContent = `Roll to the target score of ${targetScore}`;
+    gameStartTitle.textContent = `Today's puzzle - ${todayDate}`;
+    gameStartMessage.textContent = `Roll to reach the target score of ${targetScore}`;
     gameStartButton.textContent = "PLAY";
     gameStartPanel.style.display = "flex";
-
-
 }
 
 gameStartButton.addEventListener("click", function()
 {
-    // Start the game on normal difficulty
-})
+    // Find difficulty selected
+    const selectedDifficulty = document.querySelector('input[name="difficulty"]:checked').value;
+
+    // Update game state variable
+    difficulty = selectedDifficulty;
+
+    loadPuzzle(currentPuzzle);
+    createGrid();
+
+    // Hide the start panel
+    document.getElementById("gameStartPanel").style.display = "none";
+});
 
 // ------------------------------------------------------------------------ //
 
@@ -864,20 +890,7 @@ function resetDice() // Reset puzzle for re-attempt
 
     // remove panel
     document.getElementById("gameEndPanel").style.display = "none";
-    document.getElementById("gameStartPanel").style.display = "none";
 }
-// -------------------------------------------------------------------------------- //
-// -------------------------------------------------------------------------------- //
-//                              Adding difficulty multipliers                       //
-// -------------------------------------------------------------------------------- //
-// Set difficulty of the day's puzzle
-function setDifficulty(newDifficulty)
-{
-    difficulty = newDifficulty;
-
-    loadPuzzle(currentPuzzle);
-}
-// -------------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------------- //
 
 // -------------------------------------------------------------------------------- //

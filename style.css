@@ -269,303 +269,6 @@ footer
 
 
 
-/* ---------------------------------------------------------------------------------------------- */
-/* ---------------------------------------------------------------------------------------------- */
-/*                                      Mobile Layout                                             */
-@media (max-width: 700px)
-{
-    body
-    {
-        height: 100dvh;
-        min-height: 0;
-
-        display: flex;
-        flex-direction: column;
-    }
-    header
-    {
-        padding-inline: 25px;
-    }
-
-    main
-    {
-        flex: 1 1 0;
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-    }
-    footer
-    {
-        background-color: #222;
-        color: white;
-        text-align: right;
-        padding: 10px;    
-    }
-
-    #gameInfo
-    {
-        flex: 1 1 0;
-        min-height: 0;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        gap: 0px;
-    }
-    /* Score + Target Score */
-    #gameStats
-    {
-        width: auto;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        transform: translateX(0px);
-        gap: 80px;
-    }
-    /* GRID */
-    #diceGrid
-    {
-        width: min(90vw, 360px, 30vh);
-        height: min(90vw, 360px, 30vh);
-        margin-top: 20px;
-        margin-bottom: 20px;
-        align-self: center;
-
-        transform: none;
-    }
-    /* Moves + Hint */
-    #moveStats
-    {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        transform: translateX(10px);
-        gap: 100px;
-    }
-    /* ROLL GUIDE */
-    #rollGuide
-    {
-        flex: 0 0 auto;
-
-        --dice-size: clamp(20px, 7dvh, 40px);
-        --gap: clamp(8px, 2dvh, 15px);
-
-        width: calc(var(--dice-size) * 3 + var(--gap) * 2);
-        height: calc(var(--dice-size) * 3 + var(--gap) * 2);
-
-        grid-template-columns:
-            var(--dice-size) var(--gap)
-            var(--dice-size) var(--gap)
-            var(--dice-size);
-
-        grid-template-rows:
-            var(--dice-size) var(--gap)
-            var(--dice-size) var(--gap)
-            var(--dice-size);
-
-        transform: translateX(82.5px);
-        margin: 0;
-        flex-shrink: 1;
-    }
-    /* STAT ROW + Text alignment */
-    .statRow
-    {
-        display: flex;
-        grid-template-columns: 160px 20px 40px;
-
-        column-gap: 2px;
-        align-items: center;
-    }
-    .statRow h3,
-    .statRow h4
-    {
-        margin: 0;
-        line-height: 1.2;
-    }
-
-    .statRow h3:first-child
-    {
-        text-align: right;
-    }
-    .statRow h3:nth-child(2)
-    {
-        text-align: center;
-    }
-    .statRow h3:nth-child(3)
-    {
-        text-align: left;
-    }
-
-
-    #gameStartPanel
-    {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        background-color: #9595954a;
-        z-index: 1000;
-    }
-    #gameStartTitle, #gameStartMessage
-    {
-        transform: scale(0.8);
-        transform-origin: center;
-    }
-}
-
-/*                           Ultra thin Layout                                */
-@media (max-width: 380px)
-{
-    body
-    {
-        height: 100dvh;
-        min-height: 0;
-
-        display: flex;
-        flex-direction: column;
-    }
-    header
-    {
-        padding-inline: 15px;
-    }
-
-    main
-    {
-        flex: 1 1 0;
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-    }
-    footer
-    {
-        background-color: #222;
-        color: white;
-        text-align: right;
-        padding: 10px;    
-    }
-
-    #gameInfo
-    {
-        flex: 1 1 0;
-        min-height: 0;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        gap: 0px;
-    }
-    /* Score + Target Score */
-    #gameStats
-    {
-        width: auto;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        transform: translateX(0px);
-        gap: 40px;
-    }
-    /* GRID */
-    #diceGrid
-    {
-        width: min(90vw, 360px, 30vh);
-        height: min(90vw, 360px, 30vh);
-        margin-top: 20px;
-        margin-bottom: 20px;
-        align-self: center;
-
-        transform: none;
-    }
-    /* Moves + Hint */
-    #moveStats
-    {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        transform: translateX(0px);
-        gap: 60px;
-    }
-    /* ROLL GUIDE */
-    #rollGuide
-    {
-        flex: 0 0 auto;
-
-        --dice-size: clamp(20px, 7dvh, 40px);
-        --gap: clamp(8px, 2dvh, 15px);
-
-        width: calc(var(--dice-size) * 3 + var(--gap) * 2);
-        height: calc(var(--dice-size) * 3 + var(--gap) * 2);
-
-        grid-template-columns:
-            var(--dice-size) var(--gap)
-            var(--dice-size) var(--gap)
-            var(--dice-size);
-
-        grid-template-rows:
-            var(--dice-size) var(--gap)
-            var(--dice-size) var(--gap)
-            var(--dice-size);
-
-        transform: translateX(67.5px) translateY(5px);
-        margin: 0;
-        flex-shrink: 1;
-    }
-    /* STAT ROW + Text alignment */
-    .statRow
-    {
-        display: flex;
-        grid-template-columns: 160px 20px 40px;
-
-        column-gap: 2px;
-        align-items: center;
-    }
-    .statRow h3,
-    .statRow h4
-    {
-        margin: 0;
-        line-height: 1.2;
-    }
-
-    .statRow h3:first-child
-    {
-        text-align: right;
-    }
-    .statRow h3:nth-child(2)
-    {
-        text-align: center;
-    }
-    .statRow h3:nth-child(3)
-    {
-        text-align: left;
-    }
-
-
-    #gameStartPanel
-    {
-        position: fixed;
-        inset: 0;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        background-color: #9595954a;
-        z-index: 1000;
-    }
-    #gameStartTitle, #gameStartMessage
-    {
-        transform: scale(0.7);
-        transform-origin: center;
-    }
-}
-/* ------------------------------------------------------------------------------------------ */
-/* ------------------------------------------------------------------------------------------ */
-
-
-
-
 
 
 /* ------------------------------------------------------------------------- */
@@ -730,9 +433,24 @@ footer
     border: 4px solid #A3A3A3;
 
     text-align: center;
+    transform: translateY(0px);
 
+    height: 62%;
     width: 80%;
 }
+#gameStartTitle
+{
+    transform: translateY(150px);
+}
+#gameStartMessage
+{
+    transform: translateY(150px);
+}
+#gameStartButton
+{
+    transform: translateY(200px);
+}
+
 #gameEndBox h2, #gameStartBox h2
 {
     margin-top: 0;
@@ -765,3 +483,338 @@ footer
 
 /* ---------------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------- */
+/*                                      Mobile Layout                                             */
+@media (max-height: 1080px)
+{
+    #gameStartBox
+    {
+        width: 67.5%;
+        height: 67.5%;
+        transform: translateY(0px);
+    }
+    #gameStartTitle
+    {
+        transform: translateY(120px) scale(0.8);
+    }
+    #gameStartMessage
+    {
+        transform: translateY(120px);
+    }
+    #gameStartButton
+    {
+        transform: translateY(140px);
+    }
+}
+@media (max-width: 700px)
+{
+    body
+    {
+        height: 100dvh;
+        min-height: 0;
+
+        display: flex;
+        flex-direction: column;
+    }
+    header
+    {
+        padding-inline: 25px;
+    }
+
+    main
+    {
+        flex: 1 1 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    footer
+    {
+        background-color: #222;
+        color: white;
+        text-align: right;
+        padding: 10px;    
+    }
+
+    #gameInfo
+    {
+        flex: 1 1 0;
+        min-height: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 0px;
+    }
+    /* Score + Target Score */
+    #gameStats
+    {
+        width: auto;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        transform: translateX(0px);
+        gap: 80px;
+    }
+    /* GRID */
+    #diceGrid
+    {
+        width: min(90vw, 360px, 30vh);
+        height: min(90vw, 360px, 30vh);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        align-self: center;
+
+        transform: none;
+    }
+    /* Moves + Hint */
+    #moveStats
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        transform: translate(10px, -15px);
+        gap: 100px;
+    }
+    /* ROLL GUIDE */
+    #rollGuide
+    {
+        flex: 0 0 auto;
+
+        --dice-size: clamp(20px, 7dvh, 40px);
+        --gap: clamp(8px, 2dvh, 15px);
+
+        width: calc(var(--dice-size) * 3 + var(--gap) * 2);
+        height: calc(var(--dice-size) * 3 + var(--gap) * 2);
+
+        grid-template-columns:
+            var(--dice-size) var(--gap)
+            var(--dice-size) var(--gap)
+            var(--dice-size);
+
+        grid-template-rows:
+            var(--dice-size) var(--gap)
+            var(--dice-size) var(--gap)
+            var(--dice-size);
+
+        transform: translate(82.5px, -15px);
+        margin: 0;
+        flex-shrink: 1;
+    }
+    /* STAT ROW + Text alignment */
+    .statRow
+    {
+        display: flex;
+        grid-template-columns: 160px 20px 40px;
+
+        column-gap: 2px;
+        align-items: center;
+    }
+    .statRow h3,
+    .statRow h4
+    {
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .statRow h3:first-child
+    {
+        text-align: right;
+    }
+    .statRow h3:nth-child(2)
+    {
+        text-align: center;
+    }
+    .statRow h3:nth-child(3)
+    {
+        text-align: left;
+    }
+
+
+    #gameStartPanel
+    {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background-color: #9595954a;
+        z-index: 1000;
+    }
+    #gameStartBox
+    {
+        width: 90%;
+        height: 60%;
+        transform: translateY(25px);
+    }
+    #gameStartTitle
+    {
+        transform: translateY(120px) scale(0.8);
+    }
+    #gameStartMessage
+    {
+        transform: translateY(120px);
+    }
+    #gameStartButton
+    {
+        transform: translateY(140px);
+    }
+
+}
+
+/*                           Ultra thin Layout                                */
+@media (max-width: 375px)
+{
+    body
+    {
+        height: 100dvh;
+        min-height: 0;
+
+        display: flex;
+        flex-direction: column;
+    }
+    header
+    {
+        padding-inline: 15px;
+    }
+
+    main
+    {
+        flex: 1 1 0;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    footer
+    {
+        background-color: #222;
+        color: white;
+        text-align: right;
+        padding: 10px;    
+    }
+
+    #gameInfo
+    {
+        flex: 1 1 0;
+        min-height: 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 0px;
+    }
+    /* Score + Target Score */
+    #gameStats
+    {
+        width: auto;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        transform: translateX(0px);
+        gap: 40px;
+    }
+    /* GRID */
+    #diceGrid
+    {
+        width: min(90vw, 360px, 30vh);
+        height: min(90vw, 360px, 30vh);
+        margin-top: 20px;
+        margin-bottom: 20px;
+        align-self: center;
+
+        transform: none;
+    }
+    /* Moves + Hint */
+    #moveStats
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        transform: translateX(0px);
+        gap: 60px;
+    }
+    /* ROLL GUIDE */
+    #rollGuide
+    {
+        flex: 0 0 auto;
+
+        --dice-size: clamp(20px, 7dvh, 40px);
+        --gap: clamp(8px, 2dvh, 15px);
+
+        width: calc(var(--dice-size) * 3 + var(--gap) * 2);
+        height: calc(var(--dice-size) * 3 + var(--gap) * 2);
+
+        grid-template-columns:
+            var(--dice-size) var(--gap)
+            var(--dice-size) var(--gap)
+            var(--dice-size);
+
+        grid-template-rows:
+            var(--dice-size) var(--gap)
+            var(--dice-size) var(--gap)
+            var(--dice-size);
+
+        transform: translateX(67.5px) translateY(5px);
+        margin: 0;
+        flex-shrink: 1;
+    }
+    /* STAT ROW + Text alignment */
+    .statRow
+    {
+        display: flex;
+        grid-template-columns: 160px 20px 40px;
+
+        column-gap: 2px;
+        align-items: center;
+    }
+    .statRow h3,
+    .statRow h4
+    {
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .statRow h3:first-child
+    {
+        text-align: right;
+    }
+    .statRow h3:nth-child(2)
+    {
+        text-align: center;
+    }
+    .statRow h3:nth-child(3)
+    {
+        text-align: left;
+    }
+
+
+    #gameStartPanel
+    {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background-color: #9595954a;
+        z-index: 1000;
+    }
+    #gameStartBox
+    {
+        height: 62%;
+        transform: translateY(35px);
+    }
+    #gameStartTitle, #gameStartMessage, #gameStartButton
+    {
+        transform: translateY(100px) scale(0.7);
+        transform-origin: center;
+    }
+}
+/* ------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------ */

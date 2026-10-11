@@ -864,6 +864,7 @@ function resetDice() // Reset puzzle for re-attempt
 
     // remove panel
     document.getElementById("gameEndPanel").style.display = "none";
+    document.getElementById("gameStartPanel").style.display = "none";
 }
 // -------------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------------- //

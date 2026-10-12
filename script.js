@@ -17,6 +17,138 @@ const todayDate = getTodayDate();
 
 document.getElementById("puzzleDate").textContent = `Date ${todayDate}`;
 
+// save puzzle progress
+const streakStorageKey = "rolldleProgress";
+
+let streakData = JSON.parse(localStorage.getItem(streakStorageKey)) || {
+    currentStreak: 0,
+    lastCompletedDate: null,
+    completedDifficulties: {}
+};
+
+// -----------------------------------------------------//
+// streak data + save
+function saveStreakData()
+{
+    localStorage.setItem(
+        streakStorageKey,
+        JSON.stringify(streakData)
+    );
+}
+
+function dateToUTC(dateString)
+{
+    const [day, month, year] = dateString.split("/");
+
+    return Date.UTC(
+        Number(year),
+        Number(month) - 1,
+        Number(day)
+    );
+}
+
+function daysBetween(dateA, dateB)
+{
+    const oneDay = 24 * 60 * 60 * 1000;
+
+    return Math.round(
+        (dateToUTC(dateB) - dateToUTC(dateA)) / oneDay
+    );
+}
+
+function checkMissedDays()
+{
+    if (streakData.lastCompletedDate !== null)
+    {
+        const daysSinceLastCompletion = daysBetween(
+            streakData.lastCompletedDate,
+            todayDate
+        );
+
+        if (daysSinceLastCompletion > 1)
+        {
+            streakData.currentStreak = 0;
+            saveStreakData();
+        }
+    }
+
+    updateStreakDisplay();
+}
+
+function completeDailyDifficulty()
+{
+    // Ignore force loaded puzzles
+    if (replayPuzzle !== null ||
+        !currentPuzzle ||
+        currentPuzzle.date !== todayDate)
+    {
+        return;
+    }
+
+    // record todays entry if doesn't exist
+    if (!streakData.completedDifficulties[todayDate])
+    {
+        streakData.completedDifficulties[todayDate] = [];
+    }
+
+    const completed = streakData.completedDifficulties[todayDate];
+
+    // don't record the same data twice
+    if (completed.includes(difficulty))
+    {
+        return;
+    }
+
+    // record it as completed
+    completed.push(difficulty);
+
+    // add to the streak once per day only
+    if (streakData.lastCompletedDate !== todayDate)
+    {
+        const daysSinceLastCompletion = streakData.lastCompletedDate === null
+                ? null
+                : daysBetween(
+                    streakData.lastCompletedDate,
+                    todayDate
+                );
+
+        if (daysSinceLastCompletion === 1)
+        {
+            streakData.currentStreak++;
+        }
+        else
+        {
+            // set first completion or add from 0 from previous expired streak
+            streakData.currentStreak = 1;
+        }
+
+        streakData.lastCompletedDate = todayDate;
+    }
+
+    saveStreakData();
+    updateStreakDisplay();
+}
+
+function updateStreakDisplay()
+{
+    const streakElement = document.getElementById("playerStreak");
+    const footerElement = document.getElementById("footerStreak");
+
+    const completed = streakData.completedDifficulties[todayDate] || [];
+
+    if (streakElement)
+    {
+        streakElement.textContent =
+            `Your current streak is ${streakData.currentStreak}!`;
+    }
+    if (footerElement)
+    {
+        footerElement.textContent =
+            `Daily streak at ${streakData.currentStreak} | ` +
+            `Today's difficulties completed: ${completed.length}/3`;
+    }
+}
+
 // ------------------------------------------------------------------------------- //
 //                         CURRENT PUZZLE DATA                                     //
 // set puzzle values
@@ -281,12 +413,12 @@ function createGrid()
     }
 }
 
-
 // --------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------//
 selectPuzzle();
 createGrid();
 startScreen()
+checkMissedDays();
 
 document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
     radio.addEventListener('change', function() {
@@ -633,6 +765,9 @@ function checkGoal()
             gameEnd = true;
             console.log("Success! Score reached:", score);
             console.log("Rolls:", rollCount);
+
+            // add to the streak
+            completeDailyDifficulty();
 
             flashWin();
             showSuccessPanel();

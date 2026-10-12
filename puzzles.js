@@ -157,18 +157,46 @@ const puzzles =
 
                 path:               // Get targetMoves from path    // index starts at 0
                 [
-                    "up",       // move 1 - move off start square - index 0
+                    "right",       // move 1 - move off start square - index 0
                     "up",          // move 2
                     "right",          // move 3
                     "up",          // move 4
-                    "right",          // move 5       - index 4
-                    "up",        // move 6
-                    "right",          // move 7
-                    "down",          // move 8
+                    "up",          // move 5       - index 4
+                    "left",        // move 6
+                    "up",          // move 7
+                    "left",          // move 8
                     "right",           // move 9
-                    "up",        // move 10 - move to end square
+                    "down",        // move 10
+                    "left",         // move 11
+                    "down",         // move 12 - move to end square
                 ]
             },
+            hard:
+            {
+                minus: { row: 1, column: 2 },
+                multiply: { row: 2, column: 0},
+                square: { row: 0, column: 3},
+
+                targetScore: 58,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "right",          // move 2
+                    "up",          // move 3
+                    "up",          // move 4
+                    "up",          // move 5       - index 4
+                    "left",        // move 6
+                    "left",          // move 7
+                    "up",          // move 8
+                    "left",           // move 9
+                    "left",        // move 10
+                    "down",           // move 11
+                    "down",           // move 12
+                    "right",           // move 13
+                    "right",           // move 14 - move to end square
+                ]
+            }
         }
     },
 
@@ -204,6 +232,46 @@ const puzzles =
                 square: null,
 
                 targetScore: 30,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "left",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "left",          // move 3
+                    "up",          // move 4
+                    "up",          // move 5       - index 4
+                    "left",        // move 6
+                    "down",          // move 7
+                    "left",          // move 8 - move to end square
+                ]
+            },
+            medium:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
+
+                targetScore: 50,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "left",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "left",          // move 3
+                    "up",          // move 4
+                    "up",          // move 5       - index 4
+                    "left",        // move 6
+                    "down",          // move 7
+                    "left",          // move 8 - move to end square
+                ]
+            },
+            hard:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
+
+                targetScore: 80,    // set target score for game win
 
                 path:               // Get targetMoves from path    // index starts at 0
                 [

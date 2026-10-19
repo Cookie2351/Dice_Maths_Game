@@ -1,5 +1,7 @@
 Rolledle - Help Me
 
+Open ROLLDLE_Launch if path not valid open index.html in desired web browser.
+
 Controls:
 movement: arrows "up", "left", "down", "right" | "W" "A" "S" "D"
 reset: "r"

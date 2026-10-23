@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "12/10/2026",
+        date: "23/10/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -101,7 +101,7 @@ const puzzles =
     },
 
     {
-        date: "13/10/2026",
+        date: "24/10/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -201,7 +201,7 @@ const puzzles =
     },
 
     {
-        date: "14/10/2026",
+        date: "25/10/2026",
         devName: "SetPuzzle3", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -241,8 +241,8 @@ const puzzles =
                     "up",          // move 4
                     "up",          // move 5       - index 4
                     "left",        // move 6
-                    "down",          // move 7
-                    "left",          // move 8 - move to end square
+                    "down",          // move 7                            #2 left
+                    "left",          // move 8 - move to end square       #2 down
                 ]
             },
             medium:
@@ -289,7 +289,7 @@ const puzzles =
     },
 
     {
-        date: "15/10/2026",
+        date: "26/10/2026",
         devName: "SetPuzzle4", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -337,7 +337,7 @@ const puzzles =
     },
 
     {
-        date: "16/10/2026",
+        date: "27/10/2026",
         devName: "WIPPuzzle", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0

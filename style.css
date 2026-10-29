@@ -564,7 +564,12 @@ footer
 #playerStreak
 {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
+}
+#playerDifficulty
+{
+    position: absolute;
+    bottom: -5px;
 }
 
 .settingsIcon
@@ -573,8 +578,8 @@ footer
     top: 5px;
     left: 5px;
 
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     object-fit: contain;
 
     cursor: pointer;
@@ -617,8 +622,8 @@ footer
         top: 5px;
         left: 5px;
 
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: contain;
 
         cursor: pointer;
@@ -797,11 +802,21 @@ footer
         top: 0px;
         left: 0px;
 
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: contain;
 
         cursor: pointer;
+    }
+    #playerStreak
+    {
+        position: absolute;
+        bottom: 35px;
+    }
+    #playerDifficulty
+    {
+        position: absolute;
+        bottom: -5px;
     }
 }
 /* ------------------------------------------------------- */
@@ -988,8 +1003,8 @@ footer
         top: 0px;
         left: 0px;
 
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: contain;
 
         cursor: pointer;
@@ -997,7 +1012,12 @@ footer
     #playerStreak
     {
         position: absolute;
-        bottom: -10px;
+        bottom: 35px;
+    }
+    #playerDifficulty
+    {
+        position: absolute;
+        bottom: -5px;
     }
 }
 
@@ -1165,7 +1185,13 @@ footer
     {
         transform: scale(0.9);
         position: absolute;
-        bottom: -10px;
+        bottom: 40px;
+    }
+    #playerDifficulty
+    {
+        transform: scale(0.9);
+        position: absolute;
+        bottom: -5px;
     }
 
     .settingsIcon
@@ -1174,8 +1200,8 @@ footer
         top: 5px;
         left: 5px;
 
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
         object-fit: contain;
 
         cursor: pointer;

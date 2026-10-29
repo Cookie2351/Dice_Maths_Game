@@ -133,19 +133,47 @@ function updateStreakDisplay()
 {
     const streakElement = document.getElementById("playerStreak");
     const footerElement = document.getElementById("footerStreak");
+    const difficultyElement = document.getElementById("playerDifficulty");
 
+    // retrieve today's completed difficulties
     const completed = streakData.completedDifficulties[todayDate] || [];
 
+    // update streak display
     if (streakElement)
     {
         streakElement.textContent =
             `Your current streak is ${streakData.currentStreak}!`;
     }
+    // update footer display
     if (footerElement)
     {
         footerElement.textContent =
             `Daily streak at ${streakData.currentStreak} | ` +
             `Today's difficulties completed: ${completed.length}/3`;
+    }
+    // update completed difficulties message
+    if (difficultyElement)
+    {
+        if (completed.length === 3)
+        {
+            difficultyElement.textContent =
+                "You have completed all difficulties for today!";
+        }
+        else if (completed.length === 0)
+        {
+            difficultyElement.textContent =
+                "Complete a puzzle today to increase you streak!";
+        }
+        else
+        {
+            // set the capitalisation and joining of difficulties completed
+            const completedText = completed
+                .map(d => d.charAt(0).toUpperCase() + d.slice(1))
+                .join(" and ");
+            // display difficulties completed today text
+            difficultyElement.textContent =
+                `You have completed ${completedText} difficulty!`;
+        }
     }
 }
 
@@ -418,7 +446,6 @@ function createGrid()
 selectPuzzle();
 createGrid();
 startScreen()
-checkMissedDays();
 
 document.querySelectorAll('input[name="difficulty"]').forEach(radio => {
     radio.addEventListener('change', function() {
@@ -1296,3 +1323,7 @@ document.addEventListener("keydown", function(event)
         // ------------------------------------------------------- //
     }
 });
+
+
+checkMissedDays();
+updateStreakDisplay();

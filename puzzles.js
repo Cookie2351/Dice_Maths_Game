@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "23/10/2026",
+        date: "29/10/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -11,6 +11,7 @@ const puzzles =
             [1, 1, 0, 0, 1],   // row 2
             [1, 0, 0, 1, 1],   // row 3
             [1, 1, 1, 1, 1],   // row 4
+//   columns 0, 1, 2, 3, 4
         ],
 
         start: { row: 4, column: 0 },   // square has to be visible
@@ -101,7 +102,7 @@ const puzzles =
     },
 
     {
-        date: "24/10/2026",
+        date: "30/10/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -111,6 +112,7 @@ const puzzles =
             [1, 1, 1, 0, 1],   // row 2
             [1, 1, 0, 1, 1],   // row 3
             [0, 1, 1, 1, 1],   // row 4
+//   columns 0, 1, 2, 3, 4
         ],
 
         start: { row: 4, column: 2 },   // square has to be visible
@@ -201,7 +203,7 @@ const puzzles =
     },
 
     {
-        date: "25/10/2026",
+        date: "31/10/2026",
         devName: "SetPuzzle3", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -211,6 +213,7 @@ const puzzles =
             [0, 1, 1, 1, 0],   // row 2
             [0, 0, 1, 1, 1],   // row 3
             [0, 0, 1, 0, 0],   // row 4
+//   columns 0, 1, 2, 3, 4
         ],
 
         start: { row: 3, column: 4 },   // square has to be visible
@@ -247,49 +250,53 @@ const puzzles =
             },
             medium:
             {
-                minus: null,
-                multiply: null,
+                minus: { row: 2, column: 1},
+                multiply: { row: 0, column: 2},
                 square: null,
 
-                targetScore: 50,    // set target score for game win
+                targetScore: 17,    // set target score for game win
 
                 path:               // Get targetMoves from path    // index starts at 0
                 [
                     "left",       // move 1 - move off start square - index 0
-                    "up",          // move 2
-                    "left",          // move 3
-                    "up",          // move 4
+                    "left",          // move 2
+                    "up",          // move 3
+                    "left",          // move 4
                     "up",          // move 5       - index 4
-                    "left",        // move 6
-                    "down",          // move 7
-                    "left",          // move 8 - move to end square
+                    "right",        // move 6
+                    "up",          // move 7
+                    "left",          // move 8
+                    "left",          // move 9
+                    "down",          // move 10 - move to end square
                 ]
             },
             hard:
             {
-                minus: null,
-                multiply: null,
-                square: null,
+                minus: { row: 2, column: 3},
+                multiply: { row: 0, column: 0},
+                square: { row: 4, column: 2},
 
-                targetScore: 80,    // set target score for game win
+                targetScore: 72,    // set target score for game win
 
                 path:               // Get targetMoves from path    // index starts at 0
                 [
                     "left",       // move 1 - move off start square - index 0
-                    "up",          // move 2
-                    "left",          // move 3
+                    "left",          // move 2
+                    "down",          // move 3
                     "up",          // move 4
                     "up",          // move 5       - index 4
                     "left",        // move 6
-                    "down",          // move 7
-                    "left",          // move 8 - move to end square
+                    "up",          // move 7
+                    "up",          // move 8
+                    "left",          // move 9
+                    "down",          // move 10 - move to end square
                 ]
             }
         }
     },
 
     {
-        date: "26/10/2026",
+        date: "01/11/2026",
         devName: "SetPuzzle4", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -299,6 +306,7 @@ const puzzles =
             [0, 1, 1, 1, 1],   // row 2
             [0, 0, 1, 1, 0],   // row 3
             [0, 0, 1, 0, 0],   // row 4
+//   columns 0, 1, 2, 3, 4
         ],
 
         start: { row: 1, column: 1 },   // square has to be visible
@@ -332,12 +340,52 @@ const puzzles =
                     "right",        // move 7
                     "right",          // move 8 - move to end square
                 ]
+            },
+            medium:
+            {
+                minus: { row: 2, column: 3},
+                multiply: { row: 3, column: 2},
+                square: null,
+
+                targetScore: 42,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "down",          // move 2
+                    "right",          // move 3
+                    "down",          // move 4
+                    "left",          // move 5       - index 4
+                    "right",        // move 6
+                    "up",          // move 7
+                    "right",          // move 8 - move to end square
+                ]
+            },
+            hard:
+            {
+                minus: { row: 1, column: 2},
+                multiply: { row: 3, column: 3},
+                square: { row: 2, column: 1},
+
+                targetScore: 41,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "down",          // move 3
+                    "down",          // move 4
+                    "down",          // move 5       - index 4
+                    "right",        // move 6
+                    "up",          // move 7
+                    "right",          // move 8 - move to end square
+                ]
             }
         }
     },
 
     {
-        date: "27/10/2026",
+        date: "02/11/2026",
         devName: "WIPPuzzle", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -347,6 +395,7 @@ const puzzles =
             [0, 0, 0, 0, 0],   // row 2
             [0, 0, 0, 0, 0],   // row 3
             [0, 0, 1, 0, 0],   // row 4
+//   columns 0, 1, 2, 3, 4
         ],
 
         start: { row: 4, column: 2 },   // square has to be visible
@@ -393,6 +442,7 @@ const puzzles =
             [0, 0, 0, 0, 0],   // row 2
             [0, 0, 0, 0, 0],   // row 3
             [0, 0, 1, 0, 0],   // row 4
+//   columns 0, 1, 2, 3, 4
         ],
 
         start: { row: 4, column: 2 },   // square has to be visible

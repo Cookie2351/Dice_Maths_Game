@@ -133,7 +133,10 @@ function updateStreakDisplay()
 {
     const streakElement = document.getElementById("playerStreak");
     const footerElement = document.getElementById("footerStreak");
-    const difficultyElement = document.getElementById("playerDifficulty");
+    const difficultyElements = [
+        document.getElementById("playerDifficulty"),
+        document.getElementById("endPlayerDifficulty")
+    ];
 
     // retrieve today's completed difficulties
     const completed = streakData.completedDifficulties[todayDate] || [];
@@ -151,30 +154,46 @@ function updateStreakDisplay()
             `Daily streak at ${streakData.currentStreak} | ` +
             `Today's difficulties completed: ${completed.length}/3`;
     }
-    // update completed difficulties message
-    if (difficultyElement)
+
+    let difficultyMessage;
+
+    if (completed.length === 3)
     {
-        if (completed.length === 3)
-        {
-            difficultyElement.textContent =
-                "You have completed all difficulties for today!";
-        }
-        else if (completed.length === 0)
-        {
-            difficultyElement.textContent =
-                "Complete a puzzle today to increase you streak!";
-        }
-        else
-        {
-            // set the capitalisation and joining of difficulties completed
-            const completedText = completed
-                .map(d => d.charAt(0).toUpperCase() + d.slice(1))
-                .join(" and ");
-            // display difficulties completed today text
-            difficultyElement.textContent =
-                `You have completed ${completedText} difficulty!`;
-        }
+        difficultyMessage =
+            "You have completed all difficulties for today!";
     }
+    else if (completed.length === 0)
+    {
+        difficultyMessage =
+            "Complete a puzzle today to increase your streak!";
+    }
+    else
+    {
+        // set the capitalisation and joining of difficulties completed
+        const completedText = completed
+            .map(d => d.charAt(0).toUpperCase() + d.slice(1))
+            .join(" and ");
+        // display difficulties completed today text
+        difficultyMessage =
+            `You have completed ${completedText} difficulty!`;
+    }
+
+    // update both start and end panels
+    difficultyElements.forEach(function(element)
+    {
+        if (element)
+        {
+            element.textContent = difficultyMessage;
+        }
+    });
+}
+
+function updateDifficultyRadios()
+{
+    difficultyRadios.forEach(function(radio)
+    {
+        radio.checked = radio.value == difficulty;
+    });
 }
 
 // ------------------------------------------------------------------------------- //
@@ -200,6 +219,10 @@ endScreenOpen = false;
 
 // Set difficulty
 let difficulty = "normal";
+
+const difficultyRadios = document.querySelectorAll(
+    'input[name="difficulty"]'
+)
 
 // Set forced puzzle save for replay
 let replayPuzzle = null;
@@ -1324,6 +1347,7 @@ document.addEventListener("keydown", function(event)
     }
 });
 
-
+// game load
 checkMissedDays();
 updateStreakDisplay();
+updateDifficultyRadios();

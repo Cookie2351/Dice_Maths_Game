@@ -157,9 +157,25 @@
 
                 <p id="gameEndStats"></p>
 
+                <div class="difficultyChoice">
+                    <input type="radio" id="endNormal" name="difficulty" value="normal">
+                    <label for="endNormal">Normal</label>
+
+                    <input type="radio" id="endMedium" name="difficulty" value="medium">
+                    <label for="endMedium">Medium</label>
+
+                    <input type="radio" id="endHard" name="difficulty" value="hard">
+                    <label for="endHard">Hard</label>
+                </div>
+
                 <button id="gameEndButton" onclick="selectPuzzle()">
                     Play Again
                 </button>
+
+                <p id="endPlayerDifficulty">
+                    You have not completed any difficulties today.
+                    <!-- this message shouldn't ever show as it is on the success screen -->
+                </p>
 
                 <div class="Settings">
                     <img class="settingsIcon" src="Assets/Cog_Icon.png" alt="Settings">

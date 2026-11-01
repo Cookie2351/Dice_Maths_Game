@@ -558,6 +558,9 @@ function updateMovementPreviews()
         preview.remove();
     });
 
+    // Don't display previews in hard mode or after the game ends
+    if (hardModeEnabled || gameEnd) return;
+
     // Check all four directions
     addMovementPreview("forward", -1, 0);
     addMovementPreview("backward", 1, 0);
@@ -616,12 +619,36 @@ function addMovementPreview(direction, rowChange, columnChange)
     tile.appendChild(preview);
 }
 
+// Hard mode settings --------------------------------------------------//
+const hardModeToggle = document.getElementById("hardModeToggle");
+
+let hardModeEnabled =
+    localStorage.getItem("hardModeEnabled") === "true";
+
+function updateHardMode()
+{
+    document.body.classList.toggle("hardModeEnabled", hardModeEnabled);
+
+    hardModeToggle.checked = hardModeEnabled;
+
+    localStorage.setItem("hardModeEnabled", hardModeEnabled);
+
+    // Refresh movement previews
+    updateMovementPreviews();
+}
+
+hardModeToggle.addEventListener("change", function()
+{
+    hardModeEnabled = hardModeToggle.checked;
+    updateHardMode();
+});
+
 // Movement preview controls setting
 const movementPreviewControls =
     document.getElementById("movementPreviewControls");
 
-let movementPreviewControlsEnabled =
-    localStorage.getItem("movementPreviewControls") === "true";
+let movementPreviewControlsEnabled = 
+    localStorage.getItem("movementPreviewControls") !== "false";
 
 // Apply the setting
 function updateMovementPreviewControls()
@@ -649,8 +676,51 @@ movementPreviewControls.addEventListener("change", function()
     updateMovementPreviewControls();
 });
 
+// Change Difficulty
+const changeDifficultyButton = document.getElementById("changeDifficultyButton");
+
+changeDifficultyButton.addEventListener("click", function()
+{
+    // Close settings
+    settingsPanel.style.display = "none";
+
+    // Open start screen
+    gameStartPanel.style.display = "flex";
+
+    // Update screen tracking
+    startScreenOpen = true;
+    endScreenOpen = false;
+
+    // Remember where the player is returning from
+    previousScreen = "start";
+});
+
 // Apply saved setting when the game loads
 updateMovementPreviewControls();
+
+document.addEventListener("pointerdown", function(event)
+{
+    const preview = event.target.closest(".movementPreview");
+
+    if (!preview)
+    {
+        return;
+    }
+
+    if (!movementPreviewControlsEnabled)
+    {
+        return;
+    }
+
+    event.preventDefault();
+
+    const direction = preview.dataset.direction;
+
+    if (direction)
+    {
+        move(direction);
+    }
+});
 
 // -----------------------------------------------------------------------//
 // -----------------------------------------------------------------------//
@@ -743,6 +813,9 @@ const previewDelay = 300; //milliseconds    - set for delay before showing previ
 const moveDelay = 100; // milliseconds      - set for dice roll movement input delay
 const failDelay = 1500; // milliseconds      - for the CSS fail colour flash
 const winDelay = 5000;  // milliseconds     - for winning colour flash
+
+// Initialise setting
+updateHardMode();
 
 updateDiceImage();
 
@@ -1370,6 +1443,37 @@ document.addEventListener("keydown", function(event)
     )
     {
         event.preventDefault();
+    }
+
+    // Open Settings using Escape or Backspace
+    if (event.key === "Escape" || event.key === "Backspace")
+    {
+        event.preventDefault();
+
+        // Don't reopen settings if they're already open
+        if (settingsPanel.style.display === "flex")
+        {
+            return;
+        }
+
+        if (startScreenOpen)
+        {
+            previousScreen = "start";
+            gameStartPanel.style.display = "none";
+        }
+        else if (endScreenOpen)
+        {
+            previousScreen = "end";
+            gameEndPanel.style.display = "none";
+        }
+        else
+        {
+            previousScreen = "game";
+        }
+
+        settingsPanel.style.display = "flex";
+
+        return;
     }
 
     // lock game for game failed reset to stop accidental double reset

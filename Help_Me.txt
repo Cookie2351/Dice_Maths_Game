@@ -1,13 +1,26 @@
 Rolledle - Help Me
 
+Public link:
+https://cookie2351.github.io/Dice_Maths_Game/
+
+Manual way - game build:
 Open ROLLDLE_Launch - if path not valid - right click on index.html and open with your desired web browser.
 
 -------------------------------------------------------------------------------------------------
 
 Controls:
 movement: arrows "up", "left", "down", "right" | "W" "A" "S" "D"
+movement: press the roll guide images in valid movement directions	- mobile / touchscreen functionality
+movement alternate: press the movement preview images to move to that tile	- unavailable in hard mode
 reset: "r"
-buttons: click / "mouse 1"
+buttons: click / "mouse 1" / press
+settings menu: press cog icon or press "ESC" or "Backspace"
+
+Settings:
+Hard mode: disables move hint and dice movement preview.
+Movement preview controls: toggle for using movement preview guide images as movement button options.
+Settings are saved for your device and will remain the same until changed.
+
 -------------------------------------------------------------------------------------------------
 
 // FOR CHECKING GAME FUNCTIONS //						- for development and teaching team
@@ -55,7 +68,7 @@ Once you have pressed start, you must roll your dice in whatever direction you t
 You can move back and forth across the same tiles and aren't restricted in how many moves you make as long as you have the target score on reaching the goal tile. There are often multiple path options.
 
 If you have chosen your path correctly, upon reaching the goal tile you will be given a success screen and your daily streak will increase... remember to return daily to complete at least one of the daily difficulties to keep your streak going!
-Once you have successfully completed a difficulty, you will be able to select a different difficulty from the success screen to attempt next. You can also select a different difficulty upon refreshing your browser tab.
+Once you have successfully completed a difficulty, you will be able to select a different difficulty from the success screen to attempt next. You can also select a different difficulty from the settings menu or by refreshing your browser tab.
 
 
 Enjoy!

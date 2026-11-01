@@ -213,9 +213,20 @@ let targetMoves;
 
 let previewTimeout;
 
-// set states for panels for entering and exiting settings menu
-startScreenOpen = false;
-endScreenOpen = false;
+//    START PANELS    //
+let startScreenOpen = false;
+let endScreenOpen = false;
+
+// panel elements
+const gameStartPanel = document.getElementById("gameStartPanel");
+const gameEndPanel = document.getElementById("gameEndPanel");
+const settingsPanel = document.getElementById("settingsPanel");
+
+// settings controls
+const settingsIcons = document.querySelectorAll(".settingsIcon");
+const settingsExitButton = document.getElementById("settingsExitButton");
+
+let previousScreen = null;
 
 // Set difficulty
 let difficulty = "normal";
@@ -856,10 +867,8 @@ function checkGoal()
 // --------------------------------------------------------------------------//
 //                           Game Panels                                     //
 // --------------------------------------------------------------------------//
-//    START PANELS    //
 function startScreen()
 {
-    const gameStartPanel = document.getElementById("gameStartPanel");
     const gameStartTitle = document.getElementById("gameStartTitle");
     const gameStartMessage = document.getElementById("gameStartMessage");
     const gameStartButton = document.getElementById("gameStartButton");
@@ -871,6 +880,7 @@ function startScreen()
     gameStartPanel.style.display = "flex";
     
     startScreenOpen = true;
+    endScreenOpen = false;
     console.log("start set true");
 }
 
@@ -891,10 +901,6 @@ gameStartButton.addEventListener("click", function()
     console.log("start set false")
 });
 // ----------------------------------------------------------- //
-// Settings Panel
-const settingsPanel = document.getElementById("settingsPanel");
-const settingsIcons = document.querySelectorAll(".settingsIcon");
-const settingsExitButton = document.getElementById("settingsExitButton");
 
 //Open Settings
 settingsIcons.forEach(function(settingsIcon)
@@ -903,49 +909,55 @@ settingsIcons.forEach(function(settingsIcon)
     {
         if (startScreenOpen)     // Settings from start screen
         {
+            previousScreen = "start";
             gameStartPanel.style.display = "none";
-            settingsPanel.style.display = "flex";
         }
         else if (endScreenOpen)      // Settings from end screen
         {
+            previousScreen = "end";
             gameEndPanel.style.display = "none";
-            settingsPanel.style.display = "flex";
         }
         else        // Settings from play screen
         {
-            settingsPanel.style.display = "flex";
+            previousScreen = "game";
         }
+
+        settingsPanel.style.display = "flex";
     });
 });
 
 // Exit settings
 settingsExitButton.addEventListener("click", function ()
 {
-    if (startScreenOpen)     // Exit settings to start
+    settingsPanel.style.display = "none";
+
+    if (previousScreen === "start")
     {
-        settingsPanel.style.display = "none";
         gameStartPanel.style.display = "flex";
-        startScreenOpen = false;
-        console.log("start set false from exit");
-    }
-    else if (endScreenOpen)     // Exit settings to end
-    {
-        settingsPanel.style.display = "none";
-        gameEndPanel.style.display = "flex";
+
+        startScreenOpen = true;
         endScreenOpen = false;
-        console.log("end set false from settings exit")
     }
-    else        // Exit settings to play screen
+    else if (previousScreen === "end")
     {
-        settingsPanel.style.display = "none";
+        gameEndPanel.style.display = "flex";
+
+        startScreenOpen = false;
+        endScreenOpen = true;
     }
+    else
+    {
+        startScreenOpen = false;
+        endScreenOpen = false;
+    }
+
+    previousScreen = null;
 });
 
 // ----------------------------------------------------------- //
 // Game Success Panel
 function showSuccessPanel()
 {
-    const gameEndPanel = document.getElementById("gameEndPanel");
     const gameEndTitle = document.getElementById("gameEndTitle");
     const gameEndMessage = document.getElementById("gameEndMessage");
     const gameEndStats = document.getElementById("gameEndStats");
@@ -960,6 +972,7 @@ function showSuccessPanel()
     gameEndButton.textContent = "Play Again";
     gameEndPanel.style.display = "flex";
 
+    startScreenOpen = false;
     endScreenOpen = true;
     console.log("end set true");
 }
@@ -967,7 +980,6 @@ function showSuccessPanel()
 // Game Close Panel
 function showClosePanel()
 {
-    const gameEndPanel = document.getElementById("gameEndPanel");
     const gameEndTitle = document.getElementById("gameEndTitle");
     const gameEndMessage = document.getElementById("gameEndMessage");
     const gameEndStats = document.getElementById("gameEndStats");
@@ -986,6 +998,9 @@ function showClosePanel()
     gameEndButton.textContent = "Try Again";
 
     gameEndPanel.style.display = "flex";
+
+    startScreenOpen = false;
+    endScreenOpen = true;
 }
 
 gameEndButton.addEventListener("click", function()
@@ -1005,6 +1020,9 @@ gameEndButton.addEventListener("click", function()
     flashNormal();
 
     endScreenOpen = false;
+    startScreenOpen = false;
+    previousScreen = null;
+
     console.log("end set false");
 });
 

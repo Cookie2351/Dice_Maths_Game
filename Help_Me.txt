@@ -1,17 +1,30 @@
 Rolledle - Help Me
 
-Open ROLLDLE_Launch if path not valid open index.html in desired web browser.
+Open ROLLDLE_Launch - if path not valid - right click on index.html and open with your desired web browser.
+
+-------------------------------------------------------------------------------------------------
 
 Controls:
 movement: arrows "up", "left", "down", "right" | "W" "A" "S" "D"
 reset: "r"
 buttons: click / "mouse 1"
+-------------------------------------------------------------------------------------------------
 
-
+// FOR CHECKING GAME FUNCTIONS //						- for development and teaching team
 Force Puzzles / dev tools:
 Puzzles 1-9: keys 1,2,3,4,5,6,7,8,9
 (Dev Keys only in the private downloaded version, not the public online version)
+	** Forced puzzles will not add to daily streak **
 
+// FOR HELP OR PATH CHECKER //							- for development and teaching team
+Open the puzzles.js script and scroll to the desired days puzzle.
+e.g.        date: "01/11/2026",
+Then under that you will be able to find the difficulties for each day and the successful path
+that was calculated when first creating the puzzle.
+Use this if you are stuck on a puzzle or want to speed to certain parts of the game... like the win screen
+Example path for 01/11/2026 medium puzzle
+right, down, right, down. left. right, up, right	(dev key "4" and select medium difficulty)
+-------------------------------------------------------------------------------------------------
 
 How to play:
 The game requires you to roll the dice across the grid from the start (red tile) to the goal (green tile) with the additional goal requirement of reaching the target score and number of moves at that goal tile.
@@ -21,6 +34,29 @@ Number of moves is calculated by each dice movement (e.g. roll right - adds +1 m
 The player must take care in choosing their rolls so they reach the target score in the target moves as they reach the goal (e.g. Score 33 in Moves 10).
 
 The game is simple in design but hard in playing.
+
+Difficulty tiles:
+On medium and hard difficulties other tile types will appear, each with a different function.
+
+Minus tile : when rolled onto will cause the top facing number to be subtracted from the score | indicated by a yellow tile with a "-"
+Multiply tile : will cause the dice face rolled from to be multiplied with the dace faced rolled to (e.g. roll from 4 to
+		a 6 adds 24 to score) | indicated by a blue tile with a "X"
+Square tile : when rolled onto will cause the top facing number to be squared and added to the score (e.g. a 3 is showing when
+	      (player rolls onto the tile means 3^ [3x3] = 9 added to score) | indicated by purple tile with a "^"
+The difficulty levels use the same layout and dice orientation for the day, adding extra challenge and more gameplay time to each day.
+
+-------------------------------------------------------------------------------------------------
+
+Gameplay:
+On launch you will be presented with the start screen, where you must choose your desired difficulty to play (recommended to play normal difficulty first). Once you have selected a difficulty press start to begin playing.
+
+Once you have pressed start, you must roll your dice in whatever direction you think will get you to the target by the time you reach the goal tile. If you think you have made an error in your moves click "r" to reset or go to the end goal to automatically reset on a failed score.
+
+You can move back and forth across the same tiles and aren't restricted in how many moves you make as long as you have the target score on reaching the goal tile. There are often multiple path options.
+
+If you have chosen your path correctly, upon reaching the goal tile you will be given a success screen and your daily streak will increase... remember to return daily to complete at least one of the daily difficulties to keep your streak going!
+Once you have successfully completed a difficulty, you will be able to select a different difficulty from the success screen to attempt next. You can also select a different difficulty upon refreshing your browser tab.
+
 
 Enjoy!
 :)

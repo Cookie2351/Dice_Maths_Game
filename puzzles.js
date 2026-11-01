@@ -1,7 +1,7 @@
 const puzzles =
 [
     {
-        date: "29/10/2026",
+        date: "01/11/2026",
         devName: "SetPuzzle1", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -102,7 +102,7 @@ const puzzles =
     },
 
     {
-        date: "30/10/2026",
+        date: "02/11/2026",
         devName: "SetPuzzle2", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -203,7 +203,7 @@ const puzzles =
     },
 
     {
-        date: "31/10/2026",
+        date: "03/11/2026",
         devName: "SetPuzzle3", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -296,7 +296,7 @@ const puzzles =
     },
 
     {
-        date: "01/11/2026",
+        date: "04/11/2026",
         devName: "SetPuzzle4", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
@@ -335,8 +335,8 @@ const puzzles =
                     "right",          // move 2
                     "right",          // move 3
                     "down",          // move 4
-                    "left",          // move 5
-                    "up",          // move 6       - index 4
+                    "left",          // move 5       - index 4
+                    "up",          // move 6
                     "right",        // move 7
                     "right",          // move 8 - move to end square
                 ]
@@ -385,16 +385,16 @@ const puzzles =
     },
 
     {
-        date: "02/11/2026",
-        devName: "WIPPuzzle", // Set a dev command to select this puzzle
+        date: "05/11/2026",
+        devName: "SetPuzzle5", // Set a dev command to select this puzzle
 
         grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
         [
-            [0, 0, 1, 0, 0],   // row 0
-            [0, 0, 0, 0, 0],   // row 1
-            [0, 0, 0, 0, 0],   // row 2
-            [0, 0, 0, 0, 0],   // row 3
-            [0, 0, 1, 0, 0],   // row 4
+            [0, 0, 1, 1, 0],   // row 0
+            [0, 1, 1, 1, 0],   // row 1
+            [0, 1, 1, 1, 0],   // row 2
+            [0, 1, 0, 0, 0],   // row 3
+            [0, 1, 1, 0, 0],   // row 4
 //   columns 0, 1, 2, 3, 4
         ],
 
@@ -403,28 +403,173 @@ const puzzles =
 
         dice:       // set three sides so dice orientation and values can all be set
         {
-            top: 1,
-            south: 2,
-            west: 4
+            top: 6,
+            south: 3,
+            west: 5
         },
 
-        targetScore: 50,    // set target score for game win
+        difficulties:
+        {
+            normal:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
 
-        path:               // Get targetMoves from path    // index starts at 0
+                targetScore: 33,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "left",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "up",          // move 3
+                    "right",          // move 4
+                    "right",          // move 5       - index 4
+                    "up",          // move 6
+                    "left",        // move 7
+                    "up",          // move 8 - move to end square
+                ]
+            },
+            medium:
+            {
+                minus: { row: 0, column: 3},
+                multiply: { row: 2, column: 3},
+                square: null,
+
+                targetScore: 48,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "left",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "up",          // move 3
+                    "up",          // move 4
+                    "right",          // move 5       - index 4
+                    "right",          // move 6
+                    "down",        // move 7
+                    "left",          // move 8
+                    "up",           // move 9
+                    "up",           // move 10 - move to end square
+                ]
+            },
+            hard:
+            {
+                minus: { row: 2, column: 1},
+                multiply: { row: 1, column: 3},
+                square: { row: 1, column: 1},
+
+                targetScore: 57,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "left",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "up",          // move 3
+                    "up",          // move 4
+                    "right",          // move 5       - index 4
+                    "down",          // move 6
+                    "right",        // move 7
+                    "up",          // move 8
+                    "left",         // move 9                           - or up
+                    "up",          // move 10 - move to end square      - or right
+                ]
+            }
+        }
+    },
+
+    {
+        date: "06/11/2026",
+        devName: "SetPuzzle6", // Set a dev command to select this puzzle
+
+        grid:       // grid 5x5, columns 0-4, rows 0-4    // index starts at 0
         [
-            "up",       // move 1 - move off start square - index 0
-            "",          // move 2
-            "",          // move 3
-            "",          // move 4
-            "",          // move 5       - index 4
-            "",        // move 6
-            "",          // move 7
-            "",          // move 8
-            "",           // move 9
-            "",          // move 10
-            "",           // move 11
-            "",        // move 12 - move to end square
+            [0, 0, 0, 1, 0],   // row 0
+            [1, 1, 1, 1, 0],   // row 1
+            [0, 1, 1, 1, 1],   // row 2
+            [1, 1, 1, 1, 0],   // row 3
+            [0, 0, 1, 0, 0],   // row 4
+//   columns 0, 1, 2, 3, 4
         ],
+
+        start: { row: 3, column: 0 },   // square has to be visible
+        end:   { row: 1, column: 0 },   // square has to be visible
+
+        dice:       // set three sides so dice orientation and values can all be set
+        {
+            top: 4,
+            south: 5,
+            west: 1
+        },
+
+        difficulties:
+        {
+            normal:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
+
+                targetScore: 37,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "right",          // move 2
+                    "up",          // move 3
+                    "right",          // move 4
+                    "right",          // move 5       - index 4
+                    "left",          // move 6
+                    "up",        // move 7
+                    "left",          // move 8
+                    "left",          // move 9
+                    "left",          // move 10 - move to end square
+                ]
+            },
+            medium:
+            {
+                minus: { row: 2, column: 1},
+                multiply: { row: 3, column: 3},
+                square: null,
+
+                targetScore: 19,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "right",          // move 3
+                    "down",          // move 4
+                    "right",          // move 5       - index 4
+                    "up",          // move 6
+                    "up",        // move 7
+                    "left",          // move 8
+                    "left",           // move 9
+                    "left",           // move 10 - move to end square
+                ]
+            },
+            hard:
+            {
+                minus: { row: 4, column: 2},
+                multiply: { row: 2, column: 4},
+                square: { row: 2, column: 2},
+
+                targetScore: 85,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "right",          // move 2
+                    "up",          // move 3
+                    "right",          // move 4
+                    "right",          // move 5       - index 4
+                    "left",          // move 6
+                    "left",        // move 7
+                    "left",          // move 8
+                    "up",         // move 9                           - or up
+                    "left",          // move 10 - move to end square      - or right
+                ]
+            }
+        }
     },
 // -------------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------------- //
@@ -455,23 +600,69 @@ const puzzles =
             west: 4
         },
 
-        targetScore: 50,    // set target score for game win
+        difficulties:
+        {
+            normal:
+            {
+                minus: null,
+                multiply: null,
+                square: null,
 
-        path:               // Get targetMoves from path    // index starts at 0
-        [
-            "up",       // move 1 - move off start square - index 0
-            "",          // move 2
-            "",          // move 3
-            "",          // move 4
-            "",          // move 5       - index 4
-            "",        // move 6
-            "",          // move 7
-            "",          // move 8
-            "",           // move 9
-            "",          // move 10
-            "",           // move 11
-            "",        // move 12 - move to end square
-        ],
+                targetScore: 50,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "down",       // move 1 - move off start square - index 0
+                    "right",          // move 2
+                    "right",          // move 3
+                    "down",          // move 4
+                    "left",          // move 5
+                    "up",          // move 6       - index 4
+                    "right",        // move 7
+                    "right",          // move 8 - move to end square
+                ]
+            },
+            medium:
+            {
+                minus: { row: 2, column: 3},
+                multiply: { row: 3, column: 2},
+                square: null,
+
+                targetScore: 100,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "down",          // move 2
+                    "right",          // move 3
+                    "down",          // move 4
+                    "left",          // move 5       - index 4
+                    "right",        // move 6
+                    "up",          // move 7
+                    "right",          // move 8 - move to end square
+                ]
+            },
+            hard:
+            {
+                minus: { row: 1, column: 2},
+                multiply: { row: 3, column: 3},
+                square: { row: 2, column: 1},
+
+                targetScore: 200,    // set target score for game win
+
+                path:               // Get targetMoves from path    // index starts at 0
+                [
+                    "right",       // move 1 - move off start square - index 0
+                    "up",          // move 2
+                    "down",          // move 3
+                    "down",          // move 4
+                    "down",          // move 5       - index 4
+                    "right",        // move 6
+                    "up",          // move 7
+                    "right",          // move 8 - move to end square
+                ]
+            }
+        }
     },
 // -------------------------------------------------------------------------------- //
 // -------------------------------------------------------------------------------- //

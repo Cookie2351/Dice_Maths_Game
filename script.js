@@ -610,11 +610,48 @@ function addMovementPreview(direction, rowChange, columnChange)
     const preview = document.createElement("img");
 
     preview.classList.add("movementPreview");
-
     preview.src = `Assets/Dice_side${previewDice.top}.png`;
+    preview.dataset.direction = direction;
 
     tile.appendChild(preview);
 }
+
+// Movement preview controls setting
+const movementPreviewControls =
+    document.getElementById("movementPreviewControls");
+
+let movementPreviewControlsEnabled =
+    localStorage.getItem("movementPreviewControls") === "true";
+
+// Apply the setting
+function updateMovementPreviewControls()
+{
+    document.body.classList.toggle(
+        "previewControlsEnabled",
+        movementPreviewControlsEnabled
+    );
+
+    movementPreviewControls.checked =
+        movementPreviewControlsEnabled;
+
+    localStorage.setItem(
+        "movementPreviewControls",
+        movementPreviewControlsEnabled
+    );
+}
+
+// Listen for setting changes
+movementPreviewControls.addEventListener("change", function()
+{
+    movementPreviewControlsEnabled =
+        movementPreviewControls.checked;
+
+    updateMovementPreviewControls();
+});
+
+// Apply saved setting when the game loads
+updateMovementPreviewControls();
+
 // -----------------------------------------------------------------------//
 // -----------------------------------------------------------------------//
 //                          Dice image update                             //
@@ -644,6 +681,50 @@ function updateDiceImage()
     arrowRight.src = `Assets/Arrow_RIGHT.png`;
     arrowDown.src = `Assets/Arrow_DOWN.png`;
 }
+// Store the directional images and their movement directions
+const rollGuideControls =
+[
+    {
+        images: ["rollGuideUp", "arrowUp"],
+        direction: "forward"
+    },
+    {
+        images: ["rollGuideDown", "arrowDown"],
+        direction: "backward"
+    },
+    {
+        images: ["rollGuideLeft", "arrowLeft"],
+        direction: "left"
+    },
+    {
+        images: ["rollGuideRight", "arrowRight"],
+        direction: "right"
+    }
+];
+
+// Add pointer events to the roll guide images
+rollGuideControls.forEach(function(control)
+{
+    control.images.forEach(function(imageID)
+    {
+        const image = document.getElementById(imageID);
+
+        if (!image)
+        {
+            return;
+        }
+
+        image.addEventListener("pointerdown", function(event)
+        {
+            // Prevent unwanted browser interactions
+            event.preventDefault();
+
+            // Move the dice in the selected direction
+            move(control.direction);
+        });
+    });
+});
+
 window.addEventListener("resize", function()
 {
     updateDicePosition();

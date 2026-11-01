@@ -758,6 +758,17 @@ body.hardModeEnabled .movementPreview
     z-index: 10;
 }
 
+#gameStartButton, #gameEndButton
+{
+    color: #ffffff;
+    -webkit-appearance: none;
+    appearance: none;
+}
+#gameStartButton:visited, #gameStartButton:active, #gameStartButton:hover
+{
+    color: #ffffff;
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------------------------------- */
 
